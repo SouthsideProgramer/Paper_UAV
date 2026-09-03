@@ -136,3 +136,8 @@ visualization/
 .vscode/
 experiment_*.sh
 experiments/
+test/
+train/
+# DenseUAV dataset annotations - KHONG duoc public.
+# Theo docs/Request.md: "I will not make any part of this database available to a third party."
+Dense_GPS_*.txt

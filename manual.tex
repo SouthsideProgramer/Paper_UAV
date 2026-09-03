@@ -1,0 +1,370 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\geometry{margin=2.3cm}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  columns=fullflexible,
+  backgroundcolor=\color{gray!10},
+  frame=single,
+  xleftmargin=0.5em,
+  showstringspaces=false,
+}
+
+\newcommand{\cmd}[1]{\texttt{\footnotesize #1}}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
+\title{\textbf{MANUAL --- Hướng dẫn chạy code}\\[0.3em]
+\large DenseUAV: huấn luyện, đánh giá theo mét, và tái lập \texttt{report.pdf}}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+Tài liệu này hướng dẫn tái lập toàn bộ kết quả trong \texttt{report.pdf}. Mọi lệnh chạy từ thư mục gốc repo:
+
+\begin{lstlisting}[language=bash]
+cd /home/internship/thang2/DenseUAV
+\end{lstlisting}
+
+\section{Quy ước quan trọng}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{lL}
+\toprule
+\textbf{Thứ} & \textbf{Đường dẫn} \\
+\midrule
+Python (conda env đã cài sẵn) & \cmd{/home/internship/miniconda3/envs/denseuav/bin/python} \\
+Dataset root & \cmd{/home/internship/thang2/DenseUAV} (trùng luôn với repo) \\
+Ảnh train & \cmd{train/drone/}, \cmd{train/satellite/} \\
+Ảnh test & \cmd{test/query\_drone/}, \cmd{test/gallery\_satellite/} \\
+Nhãn GPS & \cmd{Dense\_GPS\_ALL.txt} (chỉ có GPS của tile vệ tinh --- xem Mục 4 của report) \\
+Kết quả mỗi lần train & \cmd{checkpoints/<tên>/} \\
+LaTeX engine & \cmd{/home/internship/.local/bin/tectonic} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Lưu ý:} dùng đúng Python trong conda env \texttt{denseuav}. Nếu gõ \texttt{python} thẳng sẽ dính Python hệ thống, thiếu torch. Để gọn hơn có thể đặt biến:
+
+\begin{lstlisting}[language=bash]
+PY=/home/internship/miniconda3/envs/denseuav/bin/python
+\end{lstlisting}
+
+\section{Kiểm tra môi trường (chạy 1 lần)}
+
+\begin{lstlisting}[language=bash]
+PY=/home/internship/miniconda3/envs/denseuav/bin/python
+$PY -c "import torch, numpy; print('torch', torch.__version__, '| numpy', numpy.__version__, '| cuda', torch.cuda.is_available())"
+\end{lstlisting}
+
+Kết quả đúng phải là: \texttt{torch 2.0.0+cu118 | numpy 1.26.4 | cuda True}
+
+\textbf{Nếu numpy là 2.x} $\rightarrow$ sẽ gặp lỗi \texttt{RuntimeError: Numpy is not available} khi train. Sửa:
+
+\begin{lstlisting}[language=bash]
+/home/internship/miniconda3/envs/denseuav/bin/pip install "numpy<2"
+\end{lstlisting}
+
+(pip sẽ cảnh báo \texttt{opencv-python requires numpy>=2} --- bỏ qua, đã kiểm tra \texttt{cv2} vẫn chạy đúng với numpy 1.26.4.)
+
+\section{Huấn luyện}
+
+\subsection{Chạy cả 4 cấu hình một lượt (khuyến nghị)}
+
+\begin{lstlisting}[language=bash]
+nohup bash run_experiments.sh > experiments.log 2>&1 &
+disown
+\end{lstlisting}
+
+Script này tự động, với \textbf{mỗi} cấu hình, chạy tuần tự:
+\texttt{train.py} $\rightarrow$ \texttt{test.py} $\rightarrow$ \texttt{evaluate\_gpu.py} $\rightarrow$ \texttt{evaluateDistance.py} $\rightarrow$ \texttt{evaluateMA.py}
+
+4 cấu hình mặc định (định nghĩa ở cuối \texttt{run\_experiments.sh}):
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Tên checkpoint} & \textbf{backbone} & \textbf{head} \\
+\midrule
+\cmd{baseline\_vits\_single} & ViTS-224 & SingleBranch \\
+\cmd{vits\_lpn} & ViTS-224 & LPN \\
+\cmd{vits\_fsra} & ViTS-224 & FSRA \\
+\cmd{resnet50\_single} & resnet50 & \textbf{SingleBranchCNN} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Thời gian: $\approx$15--19 giây/epoch $\times$ 120 epoch $\approx$ \textbf{30--40 phút/cấu hình}, tổng $\approx$2--3 tiếng trên RTX 3060.
+
+\textbf{Bắt buộc dùng \texttt{nohup} + \texttt{disown}.} Nếu không, tiến trình sẽ bị giết khi đóng terminal/phiên làm việc.
+
+Theo dõi tiến độ:
+
+\begin{lstlisting}[language=bash]
+tail -f experiments.log                  # toan bo log
+grep -E "START|DONE" experiments.log     # chi xem moc hoan thanh
+nvidia-smi                               # kiem tra GPU co dang chay khong
+\end{lstlisting}
+
+\subsection{Chạy 1 cấu hình riêng lẻ}
+
+\begin{lstlisting}[language=bash]
+PY=/home/internship/miniconda3/envs/denseuav/bin/python
+ROOT=/home/internship/thang2/DenseUAV
+
+$PY train.py --name TEN_CHECKPOINT --data_dir $ROOT/train --gpu_ids 0 --sample_num 1 \
+    --block 1 --lr 0.01 --num_worker 8 --head SingleBranch --head_pool avg \
+    --num_bottleneck 512 --backbone ViTS-224 --h 224 --w 224 --batchsize 16 \
+    --load_from no --ra satellite --re satellite --cj no --rr uav \
+    --cls_loss CELoss --feature_loss WeightedSoftTripletLoss --kl_loss KLLoss
+\end{lstlisting}
+
+\subsection{Đổi kiến trúc --- cạm bẫy quan trọng}
+
+\texttt{--backbone} và \texttt{--head} \textbf{phải khớp họ kiến trúc}, nếu không sẽ crash:
+
+\begin{center}
+\begin{tabularx}{\textwidth}{lLL}
+\toprule
+\textbf{Loại backbone} & \textbf{Ví dụ} & \textbf{Head dùng được} \\
+\midrule
+Transformer & \cmd{ViTS-224}, \cmd{ViTB-224}, \cmd{DeitS-224} & \cmd{SingleBranch}, \cmd{LPN}, \cmd{FSRA}, \cmd{GeM}, \cmd{NetVLAD} \\
+\addlinespace
+CNN & \cmd{resnet50}, \cmd{senet}, \cmd{Convnext-T}, \cmd{vgg16}, \cmd{EfficientNet-B*} & \cmd{SingleBranchCNN}, \cmd{LPN\_CNN}, \cmd{FSRA\_CNN} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Ghép sai (vd. \texttt{resnet50} + \texttt{SingleBranch}) sẽ báo:
+
+\begin{lstlisting}
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (112x7 and 2048x512)
+\end{lstlisting}
+
+Lý do: head transformer cắt token bằng \texttt{features[:, 0]}, nhưng backbone CNN trả về feature map $(B,C,H,W)$. README gốc \textbf{không} nói rõ ràng buộc này.
+
+Danh sách backbone/head hợp lệ xem ở:
+\begin{itemize}[nosep]
+  \item backbone: \texttt{models/Backbone/backbone.py}, hàm \texttt{init\_backbone()}
+  \item head: \texttt{models/Head/head.py}, hàm \texttt{make\_head()}
+\end{itemize}
+
+\section{Đánh giá (nếu đã có checkpoint, muốn chạy lại riêng phần eval)}
+
+Phải \texttt{cd} vào thư mục checkpoint trước, vì các script gốc đọc/ghi file theo đường dẫn tương đối:
+
+\begin{lstlisting}[language=bash]
+PY=/home/internship/miniconda3/envs/denseuav/bin/python
+ROOT=/home/internship/thang2/DenseUAV
+cd $ROOT/checkpoints/TEN_CHECKPOINT
+
+$PY $ROOT/test.py --name TEN_CHECKPOINT --test_dir $ROOT/test --gpu_ids 0 --num_worker 4 --h 224 --w 224
+$PY $ROOT/evaluate_gpu.py
+$PY $ROOT/evaluateDistance.py --root_dir $ROOT
+$PY $ROOT/evaluateMA.py --root_dir $ROOT
+\end{lstlisting}
+
+\textbf{Bắt buộc truyền \texttt{--h 224 --w 224} cho \texttt{test.py}.} Mặc định của \texttt{test.py} là 256$\times$256 trong khi train ở 224$\times$224 --- không truyền sẽ lệch kích thước ảnh giữa train và test (ViT dùng positional embedding cố định theo kích thước).
+
+\subsection{File sinh ra trong \texttt{checkpoints/<tên>/}}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{lL}
+\toprule
+\textbf{File} & \textbf{Nội dung} \\
+\midrule
+\cmd{net\_119.pth} & Trọng số cuối (epoch 119) \\
+\cmd{train.log} & Log huấn luyện từng epoch \\
+\cmd{pytorch\_result\_1.mat} & Đặc trưng query + gallery đã trích xuất (đã L2-normalize) \\
+\cmd{results.txt} & \texttt{Recall@1/5/10/top1} và \texttt{AP} \\
+\cmd{SDM@K(1,100).json} & SDM@K, $K = 1..100$ \\
+\cmd{MA@K(1,100)} & \textbf{Không có đuôi \texttt{.json}} --- MA@K theo mét, $k = 1..100$\,m. Chính là đường CDF dùng vẽ Hình 1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Đọc nhanh kết quả:
+
+\begin{lstlisting}[language=bash]
+cat checkpoints/TEN_CHECKPOINT/results.txt
+
+python3 -c "
+import json
+ma = json.load(open('checkpoints/TEN_CHECKPOINT/MA@K(1,100)'))
+for k in ['1','5','10','20','30','50']:
+    print(f'MA@{k}m:', round(ma[k]*100, 2))
+"
+\end{lstlisting}
+
+\section{Vẽ Hình 1 (CDF sai số)}
+
+\begin{lstlisting}[language=bash]
+/home/internship/miniconda3/envs/denseuav/bin/python plot_fig1_cdf.py
+\end{lstlisting}
+
+Xuất ra \texttt{docs/images/fig1\_cdf.png} (xem nhanh) và \texttt{.pdf} (nhúng vào LaTeX). Script tự bỏ qua checkpoint chưa có kết quả, nên chạy được cả khi mới train xong vài cấu hình.
+
+\textbf{Muốn sửa gì thì sửa ở đầu file \texttt{plot\_fig1\_cdf.py}:}
+
+\begin{lstlisting}[language=Python]
+CONFIGS = [                            # them/bot duong tren do thi
+    ("ten_thu_muc_checkpoint", "Nhan hien thi trong legend"),
+]
+S_MEDIAN = 19.71                       # buoc luoi do duoc (m)
+THEORETICAL_FLOOR = 0.399 * S_MEDIAN   # tran ly thuyet (m)
+\end{lstlisting}
+
+Đổi khoảng trục x: sửa dòng \texttt{ax.set\_xlim(0, 50)}.
+
+\subsection{Tính lại bước lưới $s$ (nếu đổi dataset)}
+
+\begin{lstlisting}[language=bash]
+/home/internship/miniconda3/envs/denseuav/bin/python - <<'EOF'
+import os, numpy as np
+config = {}
+for line in open("Dense_GPS_ALL.txt"):
+    p = line.split(" ")
+    config[p[0].split("/")[-2]] = (float(p[1].split("E")[-1]), float(p[2].split("N")[-1]))
+ids = sorted(os.listdir("test/gallery_satellite"))
+c = np.array([config[i] for i in ids])
+R = 6378137.0
+lat, lon = np.radians(c[:,1]), np.radians(c[:,0])
+nn = []
+for i in range(len(c)):
+    a = np.sin((lat-lat[i])/2)**2 + np.cos(lat[i])*np.cos(lat)*np.sin((lon-lon[i])/2)**2
+    d = 2*R*np.arcsin(np.sqrt(np.clip(a,0,1))); d[i] = np.inf
+    nn.append(d.min())
+nn = np.array(nn)
+print("median s =", np.median(nn), "m -> tran ly thuyet =", 0.399*np.median(nn), "m")
+EOF
+\end{lstlisting}
+
+\section{Bộ giải mã trọng tâm có trọng số (Mục 5 của report)}
+
+Đây là \textbf{hậu xử lý thuần túy} trên \texttt{pytorch\_result\_1.mat} --- không cần train lại, chạy vài giây.
+
+\begin{lstlisting}[language=bash]
+/home/internship/miniconda3/envs/denseuav/bin/python eval_weighted_centroid.py --tau 0.05
+\end{lstlisting}
+
+In ra median/p90/p95 (mét) của top-1 so với centroid ở $K = 1, 3, 5, 10$, cho từng checkpoint, và lưu \texttt{weighted\_centroid\_results.json}.
+
+Tham số:
+\begin{itemize}[nosep]
+  \item \texttt{--tau} (mặc định \texttt{0.05}): độ ``sắc'' của softmax trọng số. $\tau$ nhỏ $\rightarrow$ gần như chỉ lấy top-1; $\tau$ lớn $\rightarrow$ trộn đều hơn.
+  \item \texttt{--root\_dir}: thư mục dataset (mặc định đã đúng).
+  \item \textbf{$K$ nằm trong code}, không phải CLI. Sửa ở signature hàm: \texttt{def evaluate\_checkpoint(..., Ks=(1, 3, 5, 10), tau=0.05)}.
+  \item Danh sách checkpoint cần đánh giá: sửa biến \texttt{configs} trong khối \texttt{\_\_main\_\_}.
+\end{itemize}
+
+Kết quả hiện tại là \textbf{phủ định} (centroid làm sai số tệ hơn). Đây là kết luận thật, đã phân tích nguyên nhân ở Mục 5.2 của report --- không phải bug.
+
+\section{Biên dịch báo cáo}
+
+\begin{lstlisting}[language=bash]
+/home/internship/.local/bin/tectonic report.tex   # -> report.pdf
+/home/internship/.local/bin/tectonic manual.tex   # -> manual.pdf (file nay)
+\end{lstlisting}
+
+Không cần cài TeX Live --- \texttt{tectonic} là engine độc lập, tự tải gói LaTeX cần thiết (cần mạng ở lần chạy đầu).
+
+Xem nhanh PDF dưới dạng ảnh (nếu không mở được PDF viewer):
+
+\begin{lstlisting}[language=bash]
+pdftoppm -png -r 100 report.pdf /tmp/page
+\end{lstlisting}
+
+Cảnh báo \texttt{Overfull \textbackslash hbox} chỉ là lỗi trình bày nhỏ (chữ tràn nhẹ ra lề), \textbf{không} ảnh hưởng nội dung --- bỏ qua được.
+
+\textbf{Font:} file dùng \texttt{fontspec} + DejaVu (engine XeTeX). \textbf{Không} đổi sang \texttt{\textbackslash usepackage[T5]\{fontenc\}} kiểu pdflatex --- sẽ mất hết dấu tiếng Việt khi biên dịch bằng tectonic.
+
+\section{Quy trình đầy đủ từ đầu}
+
+\begin{lstlisting}[language=bash]
+cd /home/internship/thang2/DenseUAV
+PY=/home/internship/miniconda3/envs/denseuav/bin/python
+
+# 1. kiem tra moi truong
+$PY -c "import torch, numpy; print(torch.__version__, numpy.__version__, torch.cuda.is_available())"
+
+# 2. train + eval ca 4 cau hinh (~2-3 tieng)
+nohup bash run_experiments.sh > experiments.log 2>&1 &
+disown
+
+# 3. cho xong, kiem tra
+grep -E "START|DONE" experiments.log
+
+# 4. ve Hinh 1
+$PY plot_fig1_cdf.py
+
+# 5. chay bo giai ma centroid
+$PY eval_weighted_centroid.py
+
+# 6. bien dich bao cao
+/home/internship/.local/bin/tectonic report.tex
+\end{lstlisting}
+
+\section{Bảng lỗi thường gặp}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{LLL}
+\toprule
+\textbf{Lỗi} & \textbf{Nguyên nhân} & \textbf{Cách sửa} \\
+\midrule
+\cmd{RuntimeError: Numpy is not available} & numpy 2.x xung đột ABI với torch 2.0 & \cmd{pip install "numpy<2"} trong env \texttt{denseuav} \\
+\addlinespace
+\cmd{mat1 and mat2 shapes cannot be multiplied (112x7 and 2048x512)} & Ghép backbone CNN với head transformer & Dùng head \cmd{*CNN} (xem Mục 3.3) \\
+\addlinespace
+\cmd{FileNotFoundError: 'pytorch\_result\_1.mat'} & Chưa chạy \texttt{test.py}, hoặc đang đứng sai thư mục & \cmd{cd checkpoints/<tên>} rồi chạy \texttt{test.py} trước \\
+\addlinespace
+\cmd{FileNotFoundError: 'net\_119.pth'} & Train chưa xong hoặc đã crash giữa chừng & Xem \cmd{checkpoints/<tên>/train.log} để tìm lỗi thật \\
+\addlinespace
+\cmd{FileNotFoundError: 'MA@K(1,100).json'} & File này \textbf{không có} đuôi \texttt{.json} & Mở đúng tên \cmd{MA@K(1,100)} \\
+\addlinespace
+Tiến trình chết khi đóng terminal & Thiếu \texttt{nohup}/\texttt{disown} & Chạy lại theo Mục 3.1 \\
+\addlinespace
+PDF mất dấu tiếng Việt & Dùng \texttt{fontenc T5} với engine XeTeX & Giữ nguyên \texttt{fontspec} + DejaVu \\
+\addlinespace
+\cmd{Undefined control sequence \textbackslash includegraphics} & Thiếu \texttt{\textbackslash usepackage\{graphicx\}} & Đã có sẵn trong \texttt{report.tex}, đừng xóa \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Bản đồ file trong repo}
+
+\textbf{File tự viết thêm (không có trong repo gốc):}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{lL}
+\toprule
+\textbf{File} & \textbf{Chức năng} \\
+\midrule
+\cmd{run\_experiments.sh} & Chạy tuần tự train + eval cho nhiều cấu hình \\
+\cmd{plot\_fig1\_cdf.py} & Vẽ Hình 1 (CDF sai số nhiều kiến trúc) \\
+\cmd{eval\_weighted\_centroid.py} & Bộ giải mã trọng tâm có trọng số (Mục 5) \\
+\cmd{report.tex} / \cmd{report.pdf} & Báo cáo nghiên cứu \\
+\cmd{manual.tex} / \cmd{manual.pdf} & File này \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{File gốc của repo DenseUAV (không sửa gì):}
+\texttt{train.py}, \texttt{test.py}, \texttt{evaluate\_gpu.py}, \texttt{evaluateDistance.py}, \texttt{evaluateMA.py}, \texttt{evaluate\_RDS.py}, \texttt{models/}, \texttt{datasets/}, \texttt{losses/}, \texttt{tool/}
+
+Nguyên tắc đã giữ trong suốt quá trình: \textbf{không sửa code gốc của repo}, mọi thứ thêm vào đều là script riêng. Nhờ vậy kết quả so sánh được với số liệu công bố của tác giả gốc.
+
+\end{document}
