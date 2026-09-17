@@ -25,6 +25,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, "..", ".."))
 
 _ap = argparse.ArgumentParser()
 _ap.add_argument("--lang", choices=["en", "vi"], default="en",
@@ -35,8 +36,6 @@ args = _ap.parse_args()
 
 LANG = args.lang
 MAX_X = args.max_x
-
-ROOT = os.path.join(CURRENT_DIR, "checkpoints")
 
 CONFIGS = [
     ("baseline_vits_single", "ViTS + SingleBranch"),
@@ -56,15 +55,27 @@ line_styles = ["-", "--", "-.", ":"]
 found_any = False
 
 for i, (name, label) in enumerate(CONFIGS):
-    errors_path = os.path.join(ROOT, name, "errors.npy")
-    results_path = os.path.join(ROOT, name, "results.json")
+    candidates = [
+        os.path.join(PROJECT_ROOT, "checkpoints", name),
+        os.path.join(CURRENT_DIR, "checkpoints", name),
+    ]
+    errors_path = None
+    results_path = None
+    for c in candidates:
+        ep = os.path.join(c, "errors.npy")
+        rp = os.path.join(c, "results.json")
+        if os.path.exists(ep):
+            errors_path = ep
+            results_path = rp
+            break
 
-    if os.path.exists(errors_path):
+    if errors_path and os.path.exists(errors_path):
         errors = np.load(errors_path)
     elif os.path.exists(os.path.join(CURRENT_DIR, "errors.npy")) and name == "baseline_vits_single":
         errors = np.load(os.path.join(CURRENT_DIR, "errors.npy"))
+        results_path = os.path.join(CURRENT_DIR, "results.json")
     else:
-        print(f"[skip] {name}: errors.npy not found in {errors_path}")
+        print(f"[skip] {name}: errors.npy not found in {[os.path.join(c, 'errors.npy') for c in candidates]}")
         continue
 
     found_any = True
@@ -124,7 +135,9 @@ os.makedirs(docs_img_dir, exist_ok=True)
 suffix = "" if LANG == "en" else "_vi"
 out_png = os.path.join(docs_img_dir, f"fig1_cdf{suffix}.png")
 out_pdf = os.path.join(docs_img_dir, f"fig1_cdf{suffix}.pdf")
+local_png = os.path.join(CURRENT_DIR, f"fig1_cdf{suffix}.png")
 
 fig.savefig(out_png, dpi=300)
 fig.savefig(out_pdf)
-print(f"[SUCCESS] Saved figure to:\n  - {out_png}\n  - {out_pdf}")
+fig.savefig(local_png, dpi=300)
+print(f"[SUCCESS] Saved figure to:\n  - {out_png}\n  - {out_pdf}\n  - {local_png}")

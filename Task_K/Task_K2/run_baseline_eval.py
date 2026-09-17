@@ -27,6 +27,8 @@ import numpy as np
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PYTHON_EXE = sys.executable
 
+PROJECT_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, '..', '..'))
+
 MODELS = [
     ("baseline_vits_single", "ViTS-224 + SingleBranch"),
     ("vits_lpn",              "ViTS-224 + LPN"),
@@ -35,7 +37,7 @@ MODELS = [
 ]
 
 
-def run_command(cmd, cwd=CURRENT_DIR):
+def run_command(cmd, cwd=PROJECT_ROOT):
     print(f"\n[EXEC] Running: {' '.join(cmd)}")
     res = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
     if res.returncode != 0:
@@ -45,8 +47,20 @@ def run_command(cmd, cwd=CURRENT_DIR):
     return res.returncode == 0
 
 
+def find_checkpoint_dir(model_name):
+    candidates = [
+        os.path.join(PROJECT_ROOT, 'checkpoints', model_name),
+        os.path.join(CURRENT_DIR, 'checkpoints', model_name),
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return candidates[0]
+
+
 def ensure_features_and_eval(model_name, force_extract=False):
-    ckpt_dir = os.path.join(CURRENT_DIR, 'checkpoints', model_name)
+    ckpt_dir = find_checkpoint_dir(model_name)
+    os.makedirs(ckpt_dir, exist_ok=True)
     mat_path = os.path.join(ckpt_dir, 'pytorch_result_1.mat')
     results_json_path = os.path.join(ckpt_dir, 'results.json')
     errors_npy_path = os.path.join(ckpt_dir, 'errors.npy')
@@ -54,24 +68,30 @@ def ensure_features_and_eval(model_name, force_extract=False):
     # Step 1: Feature Extraction if needed
     if force_extract or not os.path.exists(mat_path):
         print(f"\n>>> Extracting features for: {model_name}...")
-        test_script = os.path.join(CURRENT_DIR, 'test.py')
+        test_script = os.path.join(PROJECT_ROOT, 'test.py')
         cmd = [PYTHON_EXE, test_script, '--name', model_name, '--batchsize', '64']
-        success = run_command(cmd)
+        success = run_command(cmd, cwd=PROJECT_ROOT)
         if not success:
             print(f"[FAIL] Could not extract features for {model_name}")
             return None
 
         # Move generated pytorch_result_1.mat to checkpoint dir
-        root_mat = os.path.join(CURRENT_DIR, 'pytorch_result_1.mat')
+        root_mat = os.path.join(PROJECT_ROOT, 'pytorch_result_1.mat')
         if os.path.exists(root_mat):
             if os.path.exists(mat_path):
                 os.remove(mat_path)
             os.replace(root_mat, mat_path)
 
-    # Step 2: Run eval_metrics.py
+    # Step 2: Check if evaluation is already cached
+    if not force_extract and os.path.exists(results_json_path) and os.path.exists(errors_npy_path):
+        print(f"[INFO] Using existing evaluation for: {model_name}")
+        with open(results_json_path, 'r') as f:
+            return json.load(f)
+
+    # Step 3: Run eval_metrics.py
     print(f"\n>>> Running eval_metrics.py for: {model_name}...")
-    eval_script = os.path.join(CURRENT_DIR, 'eval_metrics.py')
-    gps_path = os.path.join(CURRENT_DIR, 'datasets', 'DenseUAV', 'Dense_GPS_ALL.txt')
+    eval_script = os.path.join(PROJECT_ROOT, 'Task_K', 'Task_K1', 'eval_metrics.py')
+    gps_path = os.path.join(PROJECT_ROOT, 'datasets', 'DenseUAV', 'Dense_GPS_ALL.txt')
     cmd = [
         PYTHON_EXE, eval_script,
         '--result_mat', mat_path,
@@ -81,7 +101,7 @@ def ensure_features_and_eval(model_name, force_extract=False):
         '--rho', '100',
         '--n_resamples', '1000'
     ]
-    success = run_command(cmd)
+    success = run_command(cmd, cwd=PROJECT_ROOT)
     if not success or not os.path.exists(results_json_path):
         print(f"[FAIL] Evaluation failed for {model_name}")
         return None
@@ -173,8 +193,9 @@ def main():
     args = parser.parse_args()
 
     # If root pytorch_result_1.mat exists for baseline_vits_single, ensure it is copied
-    baseline_mat = os.path.join(CURRENT_DIR, 'checkpoints', 'baseline_vits_single', 'pytorch_result_1.mat')
-    root_mat = os.path.join(CURRENT_DIR, 'pytorch_result_1.mat')
+    baseline_dir = find_checkpoint_dir('baseline_vits_single')
+    baseline_mat = os.path.join(baseline_dir, 'pytorch_result_1.mat')
+    root_mat = os.path.join(PROJECT_ROOT, 'pytorch_result_1.mat')
     if os.path.exists(root_mat) and not os.path.exists(baseline_mat):
         import shutil
         shutil.copyfile(root_mat, baseline_mat)
