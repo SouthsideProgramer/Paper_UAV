@@ -5,7 +5,7 @@ import random
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
-from shutil import copyfile, copytree, rmtree
+from shutil import copyfile, copytree, rmtree, ignore_patterns
 import logging
 from models.taskflow import make_model
 from thop import profile, clever_format
@@ -36,7 +36,14 @@ def copy_file_or_tree(path, target_dir):
     if os.path.isdir(path):
         if os.path.exists(target_path):
             rmtree(target_path)
-        copytree(path, target_path)
+        copytree(
+            path, 
+            target_path, 
+            ignore=ignore_patterns(
+                'DenseUAV', 'data*', '*.jpg', '*.JPG', '*.jpeg', '*.tif', 
+                '*.png', '*.zip', '*.mat', '*.npy', '__pycache__', '*.tar', '*.gz'
+            )
+        )
     elif os.path.isfile(path):
         copyfile(path, target_path)
 
@@ -44,21 +51,10 @@ def copy_file_or_tree(path, target_dir):
 def copyfiles2checkpoints(opt):
     dir_name = os.path.join('checkpoints', opt.name)
     if not os.path.isdir(dir_name):
-        os.mkdir(dir_name)
-    # record every run
-    copy_file_or_tree('train.py', dir_name)
-    copy_file_or_tree('test.py', dir_name)
-    copy_file_or_tree('evaluate_gpu.py', dir_name)
-    copy_file_or_tree('evaluateDistance.py', dir_name)
-    copy_file_or_tree('datasets', dir_name)
-    copy_file_or_tree('losses', dir_name)
-    copy_file_or_tree('models', dir_name)
-    copy_file_or_tree('optimizers', dir_name)
-    copy_file_or_tree('tool', dir_name)
-    copy_file_or_tree('train_test_local.sh', dir_name)
+        os.makedirs(dir_name, exist_ok=True)
 
-    # save opts
-    with open('%s/opts.yaml' % dir_name, 'w') as fp:
+    # Save opts config for testing/evaluation
+    with open(os.path.join(dir_name, 'opts.yaml'), 'w') as fp:
         yaml.dump(vars(opt), fp, default_flow_style=False)
 
 
@@ -143,10 +139,22 @@ def check_box(images, boxes):
 # ---------------------------
 def load_network(opt):
     save_filename = opt.checkpoint
+    if not os.path.isabs(save_filename) and not os.path.exists(save_filename):
+        ckpt_candidates = [
+            os.path.join(getattr(opt, 'checkpoint_dir', ''), save_filename),
+            os.path.join('checkpoints', getattr(opt, 'name', ''), save_filename),
+            os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'checkpoints', getattr(opt, 'name', ''), save_filename)
+        ]
+        for c in ckpt_candidates:
+            if c and os.path.exists(c):
+                save_filename = c
+                break
+
     model = make_model(opt)
-    # print('Load the model from %s' % save_filename)
+    map_loc = 'cuda' if torch.cuda.is_available() else 'cpu'
+    state_dict = torch.load(save_filename, map_location=map_loc)
     network = model
-    network.load_state_dict(torch.load(save_filename))
+    network.load_state_dict(state_dict)
     return network
 
 
