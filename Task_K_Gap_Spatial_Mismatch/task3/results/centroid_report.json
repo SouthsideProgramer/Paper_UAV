@@ -1,0 +1,242 @@
+{
+    "metadata": {
+        "feature_mat": "../data/pytorch_result.mat",
+        "num_queries": 2331,
+        "evaluated_ks": [
+            1,
+            2,
+            3,
+            5
+        ],
+        "evaluated_taus": [
+            0.01,
+            0.05,
+            0.1,
+            1.0
+        ]
+    },
+    "top1_baseline": {
+        "mean": 1390.4952231909278,
+        "std": 1615.8265972460908,
+        "median": 751.0973045723567,
+        "p90": 3989.389061861574,
+        "p95": 4757.743455335257
+    },
+    "grid_results": {
+        "K_1": {
+            "tau_0.01": {
+                "k": 1,
+                "tau": 0.01,
+                "mean_error_m": 1390.4952231909278,
+                "median_error_m": 751.0973045723567,
+                "p90_error_m": 3989.389061861574,
+                "p95_error_m": 4757.743455335257,
+                "delta_p95_vs_top1_m": 0.0,
+                "p95_ratio_vs_top1": 1.0,
+                "pct_queries_degraded": 0.0,
+                "pct_queries_improved": 0.0
+            },
+            "tau_0.05": {
+                "k": 1,
+                "tau": 0.05,
+                "mean_error_m": 1390.4952231909278,
+                "median_error_m": 751.0973045723567,
+                "p90_error_m": 3989.389061861574,
+                "p95_error_m": 4757.743455335257,
+                "delta_p95_vs_top1_m": 0.0,
+                "p95_ratio_vs_top1": 1.0,
+                "pct_queries_degraded": 0.0,
+                "pct_queries_improved": 0.0
+            },
+            "tau_0.1": {
+                "k": 1,
+                "tau": 0.1,
+                "mean_error_m": 1390.4952231909278,
+                "median_error_m": 751.0973045723567,
+                "p90_error_m": 3989.389061861574,
+                "p95_error_m": 4757.743455335257,
+                "delta_p95_vs_top1_m": 0.0,
+                "p95_ratio_vs_top1": 1.0,
+                "pct_queries_degraded": 0.0,
+                "pct_queries_improved": 0.0
+            },
+            "tau_1.0": {
+                "k": 1,
+                "tau": 1.0,
+                "mean_error_m": 1390.4952231909278,
+                "median_error_m": 751.0973045723567,
+                "p90_error_m": 3989.389061861574,
+                "p95_error_m": 4757.743455335257,
+                "delta_p95_vs_top1_m": 0.0,
+                "p95_ratio_vs_top1": 1.0,
+                "pct_queries_degraded": 0.0,
+                "pct_queries_improved": 0.0
+            }
+        },
+        "K_2": {
+            "tau_0.01": {
+                "k": 2,
+                "tau": 0.01,
+                "mean_error_m": 1383.4302713657553,
+                "median_error_m": 844.8757593936036,
+                "p90_error_m": 3867.2101986669086,
+                "p95_error_m": 4585.831515708154,
+                "delta_p95_vs_top1_m": -171.91193962710258,
+                "p95_ratio_vs_top1": 0.963866916902734,
+                "pct_queries_degraded": 50.150150150150154,
+                "pct_queries_improved": 46.03174603174603
+            },
+            "tau_0.05": {
+                "k": 2,
+                "tau": 0.05,
+                "mean_error_m": 1383.724002347168,
+                "median_error_m": 922.1146219672845,
+                "p90_error_m": 3781.605171115941,
+                "p95_error_m": 4514.7511200280605,
+                "delta_p95_vs_top1_m": -242.9923353071963,
+                "p95_ratio_vs_top1": 0.948926978180232,
+                "pct_queries_degraded": 49.67824967824968,
+                "pct_queries_improved": 45.81724581724582
+            },
+            "tau_0.1": {
+                "k": 2,
+                "tau": 0.1,
+                "mean_error_m": 1385.1573129121653,
+                "median_error_m": 942.3005712236904,
+                "p90_error_m": 3777.3082608477675,
+                "p95_error_m": 4519.301125053722,
+                "delta_p95_vs_top1_m": -238.44233028153485,
+                "p95_ratio_vs_top1": 0.9498833149538255,
+                "pct_queries_degraded": 50.879450879450886,
+                "pct_queries_improved": 44.95924495924496
+            },
+            "tau_1.0": {
+                "k": 2,
+                "tau": 1.0,
+                "mean_error_m": 1387.2254194218685,
+                "median_error_m": 991.6554131555131,
+                "p90_error_m": 3770.313997486911,
+                "p95_error_m": 4521.221096522475,
+                "delta_p95_vs_top1_m": -236.52235881278193,
+                "p95_ratio_vs_top1": 0.9502868616113487,
+                "pct_queries_degraded": 50.536250536250535,
+                "pct_queries_improved": 44.35864435864436
+            }
+        },
+        "K_3": {
+            "tau_0.01": {
+                "k": 3,
+                "tau": 0.01,
+                "mean_error_m": 1379.8948437536699,
+                "median_error_m": 850.4197909237256,
+                "p90_error_m": 3826.176616344048,
+                "p95_error_m": 4534.70455781746,
+                "delta_p95_vs_top1_m": -223.0388975177966,
+                "p95_ratio_vs_top1": 0.953120865046289,
+                "pct_queries_degraded": 49.50664950664951,
+                "pct_queries_improved": 48.77734877734878
+            },
+            "tau_0.05": {
+                "k": 3,
+                "tau": 0.05,
+                "mean_error_m": 1390.6601954773269,
+                "median_error_m": 997.1457627572665,
+                "p90_error_m": 3724.9226947489124,
+                "p95_error_m": 4291.093908536643,
+                "delta_p95_vs_top1_m": -466.6495467986142,
+                "p95_ratio_vs_top1": 0.9019178837237807,
+                "pct_queries_degraded": 52.33805233805234,
+                "pct_queries_improved": 46.2033462033462
+            },
+            "tau_0.1": {
+                "k": 3,
+                "tau": 0.1,
+                "mean_error_m": 1396.8373853213384,
+                "median_error_m": 1029.395785576192,
+                "p90_error_m": 3705.9379989258655,
+                "p95_error_m": 4267.916968831118,
+                "delta_p95_vs_top1_m": -489.8264865041392,
+                "p95_ratio_vs_top1": 0.8970464693814343,
+                "pct_queries_degraded": 53.11025311025311,
+                "pct_queries_improved": 45.559845559845556
+            },
+            "tau_1.0": {
+                "k": 3,
+                "tau": 1.0,
+                "mean_error_m": 1403.8594919426696,
+                "median_error_m": 1088.8710493846854,
+                "p90_error_m": 3692.774949919852,
+                "p95_error_m": 4274.304874263018,
+                "delta_p95_vs_top1_m": -483.4385810722388,
+                "p95_ratio_vs_top1": 0.8983891028150922,
+                "pct_queries_degraded": 53.153153153153156,
+                "pct_queries_improved": 45.34534534534534
+            }
+        },
+        "K_5": {
+            "tau_0.01": {
+                "k": 5,
+                "tau": 0.01,
+                "mean_error_m": 1378.5994342672361,
+                "median_error_m": 864.240877558088,
+                "p90_error_m": 3800.0384515120345,
+                "p95_error_m": 4468.748778830717,
+                "delta_p95_vs_top1_m": -288.9946765045397,
+                "p95_ratio_vs_top1": 0.9392580370888922,
+                "pct_queries_degraded": 50.364650364650366,
+                "pct_queries_improved": 48.69154869154869
+            },
+            "tau_0.05": {
+                "k": 5,
+                "tau": 0.05,
+                "mean_error_m": 1405.0161779518098,
+                "median_error_m": 1047.502971568961,
+                "p90_error_m": 3595.71832079607,
+                "p95_error_m": 4186.7714678752045,
+                "delta_p95_vs_top1_m": -570.9719874600523,
+                "p95_ratio_vs_top1": 0.8799910098515771,
+                "pct_queries_degraded": 54.3972543972544,
+                "pct_queries_improved": 45.30244530244531
+            },
+            "tau_0.1": {
+                "k": 5,
+                "tau": 0.1,
+                "mean_error_m": 1418.0904685485255,
+                "median_error_m": 1084.721823799022,
+                "p90_error_m": 3559.3037406672615,
+                "p95_error_m": 4163.287096172589,
+                "delta_p95_vs_top1_m": -594.4563591626675,
+                "p95_ratio_vs_top1": 0.8750549783225379,
+                "pct_queries_degraded": 55.04075504075504,
+                "pct_queries_improved": 44.65894465894466
+            },
+            "tau_1.0": {
+                "k": 5,
+                "tau": 1.0,
+                "mean_error_m": 1431.5055191605131,
+                "median_error_m": 1124.5921694648653,
+                "p90_error_m": 3536.7427805189,
+                "p95_error_m": 4146.715778400368,
+                "delta_p95_vs_top1_m": -611.0276769348884,
+                "p95_ratio_vs_top1": 0.8715719578680327,
+                "pct_queries_degraded": 55.25525525525525,
+                "pct_queries_improved": 44.573144573144575
+            }
+        }
+    },
+    "criteria_verification": {
+        "criterion_1_tail_error_blowup": {
+            "top1_p95_m": 4757.74,
+            "centroid_k5_tau10_p95_m": 4146.72,
+            "delta_p95_m": -611.03,
+            "passed": true,
+            "interpretation": "Tail error p95 explodes dramatically when using Centroid with K >= 3"
+        },
+        "criterion_2_accuracy_degradation": {
+            "pct_queries_degraded_k5": 55.04,
+            "passed": true,
+            "interpretation": "Naive Centroid causes localization accuracy degradation for the vast majority of queries"
+        },
+        "gap_1_naive_centroid_crash_proven": true
+    }
+}

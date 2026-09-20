@@ -1,0 +1,596 @@
+{
+    "metadata": {
+        "feature_mat": "../data/pytorch_result.mat",
+        "num_queries": 2331,
+        "num_gallery": 18198,
+        "feature_dimension": 512
+    },
+    "results_by_k": {
+        "Top_5": {
+            "k": 5,
+            "valid_queries": 2331,
+            "spearman_rho": {
+                "mean": 0.09684712090231824,
+                "std": 0.518503734379113,
+                "median": 0.10259783520851541,
+                "p25": -0.28867513459481287,
+                "p75": 0.5642880936468347,
+                "percentage_negative_or_zero": 46.246246246246244,
+                "percentage_under_0_30": 62.03346203346203
+            },
+            "kendall_tau": {
+                "mean": 0.08310220293560218,
+                "std": 0.44363800930735764,
+                "median": 0.10540925533894598
+            },
+            "spatial_inversion_rate": {
+                "query_level_violation_percent": 90.04719004719006,
+                "adjacent_pairs_P_di1_less_than_di_percent": 34.98498498498498,
+                "all_pairs_inversion_percent": 34.48734448734449
+            },
+            "sample_queries": [
+                {
+                    "query_index": 0,
+                    "query_label": "2256",
+                    "topk_similarities": [
+                        0.5646,
+                        0.5488,
+                        0.5458,
+                        0.5426,
+                        0.542
+                    ],
+                    "topk_distances_m": [
+                        5122.71,
+                        5088.13,
+                        5122.71,
+                        5122.71,
+                        5336.55
+                    ],
+                    "spearman_rho": 0.6708,
+                    "kendall_tau": 0.5976,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 1,
+                    "query_label": "2256",
+                    "topk_similarities": [
+                        0.6275,
+                        0.6124,
+                        0.6091,
+                        0.6022,
+                        0.5941
+                    ],
+                    "topk_distances_m": [
+                        5019.69,
+                        5019.69,
+                        3378.97,
+                        5019.69,
+                        3378.97
+                    ],
+                    "spearman_rho": -0.5774,
+                    "kendall_tau": -0.5164,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 2,
+                    "query_label": "2256",
+                    "topk_similarities": [
+                        0.6343,
+                        0.626,
+                        0.5982,
+                        0.5954,
+                        0.5932
+                    ],
+                    "topk_distances_m": [
+                        5336.55,
+                        5451.03,
+                        5005.5,
+                        5336.55,
+                        5336.55
+                    ],
+                    "spearman_rho": -0.2236,
+                    "kendall_tau": -0.1195,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 3,
+                    "query_label": "2257",
+                    "topk_similarities": [
+                        0.6142,
+                        0.5718,
+                        0.5668,
+                        0.5558,
+                        0.5506
+                    ],
+                    "topk_distances_m": [
+                        5278.4,
+                        948.28,
+                        5278.4,
+                        5104.22,
+                        5104.22
+                    ],
+                    "spearman_rho": -0.2635,
+                    "kendall_tau": -0.2236,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 4,
+                    "query_label": "2257",
+                    "topk_similarities": [
+                        0.6069,
+                        0.5829,
+                        0.5644,
+                        0.5628,
+                        0.547
+                    ],
+                    "topk_distances_m": [
+                        948.28,
+                        948.28,
+                        948.28,
+                        1139.35,
+                        1152.05
+                    ],
+                    "spearman_rho": 0.8944,
+                    "kendall_tau": 0.8367,
+                    "has_spatial_inversion": false
+                },
+                {
+                    "query_index": 5,
+                    "query_label": "2257",
+                    "topk_similarities": [
+                        0.5498,
+                        0.5492,
+                        0.5448,
+                        0.533,
+                        0.5269
+                    ],
+                    "topk_distances_m": [
+                        3936.47,
+                        5001.35,
+                        3955.89,
+                        3936.47,
+                        5001.35
+                    ],
+                    "spearman_rho": 0.3162,
+                    "kendall_tau": 0.2236,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 6,
+                    "query_label": "2258",
+                    "topk_similarities": [
+                        0.6027,
+                        0.5989,
+                        0.5981,
+                        0.5897,
+                        0.5795
+                    ],
+                    "topk_distances_m": [
+                        3922.99,
+                        5090.68,
+                        5239.02,
+                        5451.2,
+                        3922.99
+                    ],
+                    "spearman_rho": 0.2052,
+                    "kendall_tau": 0.3162,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 7,
+                    "query_label": "2258",
+                    "topk_similarities": [
+                        0.6119,
+                        0.5881,
+                        0.5789,
+                        0.5757,
+                        0.5595
+                    ],
+                    "topk_distances_m": [
+                        1124.63,
+                        1124.63,
+                        1111.48,
+                        1455.77,
+                        19.74
+                    ],
+                    "spearman_rho": -0.3591,
+                    "kendall_tau": -0.3162,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 8,
+                    "query_label": "2258",
+                    "topk_similarities": [
+                        0.5416,
+                        0.5389,
+                        0.5297,
+                        0.5247,
+                        0.5237
+                    ],
+                    "topk_distances_m": [
+                        3922.99,
+                        5327.44,
+                        5090.68,
+                        5327.44,
+                        4206.42
+                    ],
+                    "spearman_rho": 0.2052,
+                    "kendall_tau": 0.1054,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 9,
+                    "query_label": "2259",
+                    "topk_similarities": [
+                        0.5841,
+                        0.5693,
+                        0.5664,
+                        0.562,
+                        0.5612
+                    ],
+                    "topk_distances_m": [
+                        5238.92,
+                        5219.22,
+                        5238.92,
+                        4287.14,
+                        5013.17
+                    ],
+                    "spearman_rho": -0.7182,
+                    "kendall_tau": -0.527,
+                    "has_spatial_inversion": true
+                }
+            ]
+        },
+        "Top_10": {
+            "k": 10,
+            "valid_queries": 2331,
+            "spearman_rho": {
+                "mean": 0.120586383706834,
+                "std": 0.39561359479428415,
+                "median": 0.1334847624943829,
+                "p25": -0.17369629416806354,
+                "p75": 0.41938984835608883,
+                "percentage_negative_or_zero": 38.05233805233805,
+                "percentage_under_0_30": 64.30716430716431
+            },
+            "kendall_tau": {
+                "mean": 0.09343653669323282,
+                "std": 0.31078983033538027,
+                "median": 0.09428090415820634
+            },
+            "spatial_inversion_rate": {
+                "query_level_violation_percent": 100.0,
+                "adjacent_pairs_P_di1_less_than_di_percent": 39.768339768339764,
+                "all_pairs_inversion_percent": 38.435578435578435
+            },
+            "sample_queries": [
+                {
+                    "query_index": 0,
+                    "query_label": "2256",
+                    "topk_similarities": [
+                        0.5646,
+                        0.5488,
+                        0.5458,
+                        0.5426,
+                        0.542,
+                        0.541,
+                        0.5325,
+                        0.5296,
+                        0.5252,
+                        0.5184
+                    ],
+                    "topk_distances_m": [
+                        5122.71,
+                        5088.13,
+                        5122.71,
+                        5122.71,
+                        5336.55,
+                        3954.48,
+                        5019.69,
+                        3954.48,
+                        5088.13,
+                        5147.18
+                    ],
+                    "spearman_rho": -0.1852,
+                    "kendall_tau": -0.0943,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 1,
+                    "query_label": "2256",
+                    "topk_similarities": [
+                        0.6275,
+                        0.6124,
+                        0.6091,
+                        0.6022,
+                        0.5941,
+                        0.5563,
+                        0.5537,
+                        0.5536,
+                        0.5421,
+                        0.5273
+                    ],
+                    "topk_distances_m": [
+                        5019.69,
+                        5019.69,
+                        3378.97,
+                        5019.69,
+                        3378.97,
+                        1129.21,
+                        3378.97,
+                        1129.21,
+                        4066.62,
+                        0.0
+                    ],
+                    "spearman_rho": -0.7043,
+                    "kendall_tau": -0.5804,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 2,
+                    "query_label": "2256",
+                    "topk_similarities": [
+                        0.6343,
+                        0.626,
+                        0.5982,
+                        0.5954,
+                        0.5932,
+                        0.5876,
+                        0.5871,
+                        0.5861,
+                        0.5834,
+                        0.5784
+                    ],
+                    "topk_distances_m": [
+                        5336.55,
+                        5451.03,
+                        5005.5,
+                        5336.55,
+                        5336.55,
+                        5317.62,
+                        5019.69,
+                        5336.55,
+                        5336.55,
+                        5336.55
+                    ],
+                    "spearman_rho": -0.0956,
+                    "kendall_tau": -0.0544,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 3,
+                    "query_label": "2257",
+                    "topk_similarities": [
+                        0.6142,
+                        0.5718,
+                        0.5668,
+                        0.5558,
+                        0.5506,
+                        0.5492,
+                        0.5426,
+                        0.5407,
+                        0.5337,
+                        0.5333
+                    ],
+                    "topk_distances_m": [
+                        5278.4,
+                        948.28,
+                        5278.4,
+                        5104.22,
+                        5104.22,
+                        5128.77,
+                        5338.41,
+                        5104.22,
+                        948.28,
+                        948.28
+                    ],
+                    "spearman_rho": -0.3677,
+                    "kendall_tau": -0.2902,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 4,
+                    "query_label": "2257",
+                    "topk_similarities": [
+                        0.6069,
+                        0.5829,
+                        0.5644,
+                        0.5628,
+                        0.547,
+                        0.5434,
+                        0.5417,
+                        0.539,
+                        0.5267,
+                        0.5215
+                    ],
+                    "topk_distances_m": [
+                        948.28,
+                        948.28,
+                        948.28,
+                        1139.35,
+                        1152.05,
+                        1387.46,
+                        1387.46,
+                        948.28,
+                        1930.37,
+                        1139.35
+                    ],
+                    "spearman_rho": 0.5664,
+                    "kendall_tau": 0.5147,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 5,
+                    "query_label": "2257",
+                    "topk_similarities": [
+                        0.5498,
+                        0.5492,
+                        0.5448,
+                        0.533,
+                        0.5269,
+                        0.5246,
+                        0.5167,
+                        0.502,
+                        0.5009,
+                        0.4994
+                    ],
+                    "topk_distances_m": [
+                        3936.47,
+                        5001.35,
+                        3955.89,
+                        3936.47,
+                        5001.35,
+                        3936.47,
+                        1126.37,
+                        3955.89,
+                        5281.96,
+                        4987.19
+                    ],
+                    "spearman_rho": 0.2161,
+                    "kendall_tau": 0.1414,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 6,
+                    "query_label": "2258",
+                    "topk_similarities": [
+                        0.6027,
+                        0.5989,
+                        0.5981,
+                        0.5897,
+                        0.5795,
+                        0.5707,
+                        0.5514,
+                        0.5439,
+                        0.5401,
+                        0.5382
+                    ],
+                    "topk_distances_m": [
+                        3922.99,
+                        5090.68,
+                        5239.02,
+                        5451.2,
+                        3922.99,
+                        5239.02,
+                        3379.77,
+                        5239.02,
+                        5109.88,
+                        5451.2
+                    ],
+                    "spearman_rho": 0.3025,
+                    "kendall_tau": 0.2357,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 7,
+                    "query_label": "2258",
+                    "topk_similarities": [
+                        0.6119,
+                        0.5881,
+                        0.5789,
+                        0.5757,
+                        0.5595,
+                        0.5588,
+                        0.547,
+                        0.5264,
+                        0.5257,
+                        0.5253
+                    ],
+                    "topk_distances_m": [
+                        1124.63,
+                        1124.63,
+                        1111.48,
+                        1455.77,
+                        19.74,
+                        1137.48,
+                        1124.63,
+                        1327.59,
+                        4286.3,
+                        3987.08
+                    ],
+                    "spearman_rho": 0.6442,
+                    "kendall_tau": 0.46,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 8,
+                    "query_label": "2258",
+                    "topk_similarities": [
+                        0.5416,
+                        0.5389,
+                        0.5297,
+                        0.5247,
+                        0.5237,
+                        0.5217,
+                        0.5203,
+                        0.5182,
+                        0.5178,
+                        0.5173
+                    ],
+                    "topk_distances_m": [
+                        3922.99,
+                        5327.44,
+                        5090.68,
+                        5327.44,
+                        4206.42,
+                        4082.43,
+                        5239.02,
+                        3984.55,
+                        5327.44,
+                        5327.44
+                    ],
+                    "spearman_rho": 0.2751,
+                    "kendall_tau": 0.1671,
+                    "has_spatial_inversion": true
+                },
+                {
+                    "query_index": 9,
+                    "query_label": "2259",
+                    "topk_similarities": [
+                        0.5841,
+                        0.5693,
+                        0.5664,
+                        0.562,
+                        0.5612,
+                        0.5595,
+                        0.5549,
+                        0.5491,
+                        0.5476,
+                        0.5467
+                    ],
+                    "topk_distances_m": [
+                        5238.92,
+                        5219.22,
+                        5238.92,
+                        4287.14,
+                        5013.17,
+                        5372.94,
+                        5372.94,
+                        5013.17,
+                        5369.62,
+                        5219.22
+                    ],
+                    "spearman_rho": 0.1166,
+                    "kendall_tau": 0.0698,
+                    "has_spatial_inversion": true
+                }
+            ]
+        }
+    },
+    "criteria_verification": {
+        "criterion_1_low_spearman": {
+            "threshold": "< 0.30",
+            "observed_value": 0.0968,
+            "passed": true,
+            "interpretation": "Visual rank fails to reflect spatial proximity order"
+        },
+        "criterion_2_spatial_monotonicity_violation": {
+            "threshold": "> 40.0% of queries violating distance ordering",
+            "query_level_violation_percent": 90.05,
+            "adjacent_pairs_inversion_percent": 34.98,
+            "passed": true,
+            "interpretation": "Top candidates violate spatial monotonicity in over 90% of queries!"
+        },
+        "gap_1_spatial_mismatch_proven": true
+    }
+}

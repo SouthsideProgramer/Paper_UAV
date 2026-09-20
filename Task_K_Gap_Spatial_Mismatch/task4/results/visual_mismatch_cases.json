@@ -1,0 +1,999 @@
+{
+    "metadata": {
+        "feature_mat": "../data/pytorch_result.mat",
+        "num_queries_evaluated": 2331,
+        "thresholds": {
+            "similarity_threshold": 0.7,
+            "distance_threshold_meters": 200.0
+        }
+    },
+    "quadrant_distribution": {
+        "high_confidence_correct": {
+            "count": 200,
+            "percent": 8.58,
+            "condition": "s1 >= 0.7 and d1 < 200.0m"
+        },
+        "high_confidence_mismatch_spatial_gap": {
+            "count": 79,
+            "percent": 3.39,
+            "condition": "s1 >= 0.7 and d1 >= 200.0m"
+        },
+        "low_confidence_error": {
+            "count": 1260,
+            "percent": 54.05,
+            "condition": "s1 < 0.7 and d1 >= 200.0m"
+        },
+        "low_confidence_correct": {
+            "count": 792,
+            "percent": 33.98,
+            "condition": "s1 < 0.7 and d1 < 200.0m"
+        }
+    },
+    "severe_mismatch_statistics": {
+        "s1_gt_thresh_and_d1_gt_500m_count": 68,
+        "s1_gt_thresh_and_d1_gt_1000m_count": 55,
+        "s1_gt_090_and_d1_gt_500m_count": 0,
+        "s1_gt_090_and_d1_gt_1000m_count": 0
+    },
+    "criteria_verification": {
+        "criterion_extreme_mismatch_exists": {
+            "condition": "Existence of cases where s1 > 0.90 (or >= 0.85) with d1 > 500m / > 1000m",
+            "observed_cases_count": 55,
+            "passed": true,
+            "interpretation": "Discovered high-confidence visual mismatch cases where model is extremely confident in visual match but drone is located in a completely different campus"
+        },
+        "gap_1_high_confidence_mismatch_proven": true
+    },
+    "top_severe_mismatch_cases": [
+        {
+            "query_index": 410,
+            "query_label": "2392",
+            "query_gps": [
+                120.335405,
+                30.32281763888889
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002392\\H90.JPG",
+            "top1_gallery_index": 11237,
+            "top1_gallery_label": "1872",
+            "top1_gallery_gps": [
+                120.391758,
+                30.3190145
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001872\\H90_old.tif",
+            "s1_cosine_similarity": 0.7705655097961426,
+            "d1_geodesic_distance_m": 5431.610695182724,
+            "is_label_match": false
+        },
+        {
+            "query_index": 96,
+            "query_label": "2288",
+            "query_gps": [
+                120.33562888888889,
+                30.324081333333332
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002288\\H100.JPG",
+            "top1_gallery_index": 10567,
+            "top1_gallery_label": "1761",
+            "top1_gallery_gps": [
+                120.38990241666667,
+                30.320092555555554
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001761\\H100_old.tif",
+            "s1_cosine_similarity": 0.7874741554260254,
+            "d1_geodesic_distance_m": 5234.0711205864545,
+            "is_label_match": false
+        },
+        {
+            "query_index": 104,
+            "query_label": "2290",
+            "query_gps": [
+                120.33541947222223,
+                30.323903916666666
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002290\\H90.JPG",
+            "top1_gallery_index": 10932,
+            "top1_gallery_label": "1822",
+            "top1_gallery_gps": [
+                120.38908019444445,
+                30.319540583333332
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001822\\H100.tif",
+            "s1_cosine_similarity": 0.764039158821106,
+            "d1_geodesic_distance_m": 5179.163660473748,
+            "is_label_match": false
+        },
+        {
+            "query_index": 101,
+            "query_label": "2289",
+            "query_gps": [
+                120.33542077777778,
+                30.324081944444444
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002289\\H90.JPG",
+            "top1_gallery_index": 10746,
+            "top1_gallery_label": "1791",
+            "top1_gallery_gps": [
+                120.38907691666667,
+                30.31973302777778
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001791\\H100.tif",
+            "s1_cosine_similarity": 0.7533825635910034,
+            "d1_geodesic_distance_m": 5178.565199806459,
+            "is_label_match": false
+        },
+        {
+            "query_index": 98,
+            "query_label": "2288",
+            "query_gps": [
+                120.33562888888889,
+                30.324081333333332
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002288\\H90.JPG",
+            "top1_gallery_index": 10686,
+            "top1_gallery_label": "1781",
+            "top1_gallery_gps": [
+                120.39053844444445,
+                30.319915194444444
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001781\\H100.tif",
+            "s1_cosine_similarity": 0.7275633811950684,
+            "d1_geodesic_distance_m": 5296.666922525118,
+            "is_label_match": false
+        },
+        {
+            "query_index": 99,
+            "query_label": "2289",
+            "query_gps": [
+                120.33542077777778,
+                30.324081944444444
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002289\\H100.JPG",
+            "top1_gallery_index": 10746,
+            "top1_gallery_label": "1791",
+            "top1_gallery_gps": [
+                120.38907691666667,
+                30.31973302777778
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001791\\H100.tif",
+            "s1_cosine_similarity": 0.7411518692970276,
+            "d1_geodesic_distance_m": 5178.565199806459,
+            "is_label_match": false
+        },
+        {
+            "query_index": 476,
+            "query_label": "2414",
+            "query_gps": [
+                120.33769802777778,
+                30.32263675
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002414\\H90.JPG",
+            "top1_gallery_index": 10723,
+            "top1_gallery_label": "1787",
+            "top1_gallery_gps": [
+                120.38928877777778,
+                30.319919111111112
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001787\\H100_old.tif",
+            "s1_cosine_similarity": 0.7557665109634399,
+            "d1_geodesic_distance_m": 4966.674752942398,
+            "is_label_match": false
+        },
+        {
+            "query_index": 102,
+            "query_label": "2290",
+            "query_gps": [
+                120.33541947222223,
+                30.323903916666666
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002290\\H100.JPG",
+            "top1_gallery_index": 10931,
+            "top1_gallery_label": "1821",
+            "top1_gallery_gps": [
+                120.38928225,
+                30.319547222222223
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001821\\H90_old.tif",
+            "s1_cosine_similarity": 0.7021373510360718,
+            "d1_geodesic_distance_m": 5198.425041500858,
+            "is_label_match": false
+        },
+        {
+            "query_index": 86,
+            "query_label": "2284",
+            "query_gps": [
+                120.33645563888889,
+                30.324078166666666
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002284\\H90.JPG",
+            "top1_gallery_index": 10941,
+            "top1_gallery_label": "1823",
+            "top1_gallery_gps": [
+                120.38886722222222,
+                30.319545472222224
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001823\\H80_old.tif",
+            "s1_cosine_similarity": 0.7088394165039062,
+            "d1_geodesic_distance_m": 5061.513745662267,
+            "is_label_match": false
+        },
+        {
+            "query_index": 509,
+            "query_label": "2425",
+            "query_gps": [
+                120.33540525,
+                30.322608972222223
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002425\\H90.JPG",
+            "top1_gallery_index": 16696,
+            "top1_gallery_label": "2782",
+            "top1_gallery_gps": [
+                120.38001152777778,
+                30.32306136111111
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\002782\\H90.tif",
+            "s1_cosine_similarity": 0.8290541768074036,
+            "d1_geodesic_distance_m": 4286.529157579494,
+            "is_label_match": false
+        },
+        {
+            "query_index": 473,
+            "query_label": "2413",
+            "query_gps": [
+                120.33790380555556,
+                30.322639083333332
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002413\\H90.JPG",
+            "top1_gallery_index": 10729,
+            "top1_gallery_label": "1788",
+            "top1_gallery_gps": [
+                120.38908036111111,
+                30.319919194444445
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001788\\H100_old.tif",
+            "s1_cosine_similarity": 0.7146084904670715,
+            "d1_geodesic_distance_m": 4926.963851507201,
+            "is_label_match": false
+        },
+        {
+            "query_index": 114,
+            "query_label": "2294",
+            "query_gps": [
+                120.33624358333333,
+                30.323907527777777
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002294\\H100.JPG",
+            "top1_gallery_index": 2014,
+            "top1_gallery_label": "335",
+            "top1_gallery_gps": [
+                120.38328825,
+                30.310146055555556
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\000335\\H90.tif",
+            "s1_cosine_similarity": 0.7213783860206604,
+            "d1_geodesic_distance_m": 4773.3085904942955,
+            "is_label_match": false
+        },
+        {
+            "query_index": 103,
+            "query_label": "2290",
+            "query_gps": [
+                120.33541947222223,
+                30.323903916666666
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002290\\H80.JPG",
+            "top1_gallery_index": 16689,
+            "top1_gallery_label": "2781",
+            "top1_gallery_gps": [
+                120.3798025,
+                30.323061916666667
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\002781\\H80_old.tif",
+            "s1_cosine_similarity": 0.7274904251098633,
+            "d1_geodesic_distance_m": 4265.782840635815,
+            "is_label_match": false
+        },
+        {
+            "query_index": 83,
+            "query_label": "2283",
+            "query_gps": [
+                120.33666119444445,
+                30.324077805555554
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002283\\H90.JPG",
+            "top1_gallery_index": 16470,
+            "top1_gallery_label": "2745",
+            "top1_gallery_gps": [
+                120.37938644444445,
+                30.32342402777778
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\002745\\H100.tif",
+            "s1_cosine_similarity": 0.7099835872650146,
+            "d1_geodesic_distance_m": 4106.091337890283,
+            "is_label_match": false
+        },
+        {
+            "query_index": 70,
+            "query_label": "2279",
+            "query_gps": [
+                120.33749738888889,
+                30.324078222222223
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002279\\H80.JPG",
+            "top1_gallery_index": 10461,
+            "top1_gallery_label": "1743",
+            "top1_gallery_gps": [
+                120.37657263888889,
+                30.31900761111111
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001743\\H80_old.tif",
+            "s1_cosine_similarity": 0.7055147886276245,
+            "d1_geodesic_distance_m": 3796.994702733632,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1119,
+            "query_label": "2629",
+            "query_gps": [
+                120.33968338888889,
+                30.315985472222224
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002629\\H100.JPG",
+            "top1_gallery_index": 16596,
+            "top1_gallery_label": "2766",
+            "top1_gallery_gps": [
+                120.37772911111111,
+                30.32323936111111
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\002766\\H100.tif",
+            "s1_cosine_similarity": 0.7075318098068237,
+            "d1_geodesic_distance_m": 3744.0628580310668,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1025,
+            "query_label": "2597",
+            "query_gps": [
+                120.33926847222222,
+                30.316353083333333
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002597\\H90.JPG",
+            "top1_gallery_index": 10154,
+            "top1_gallery_label": "1692",
+            "top1_gallery_gps": [
+                120.37721977777778,
+                30.320102277777778
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001692\\H80.tif",
+            "s1_cosine_similarity": 0.7104307413101196,
+            "d1_geodesic_distance_m": 3670.7299624556144,
+            "is_label_match": false
+        },
+        {
+            "query_index": 2133,
+            "query_label": "2967",
+            "query_gps": [
+                120.34469025,
+                30.31657013888889
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002967\\H100.JPG",
+            "top1_gallery_index": 9818,
+            "top1_gallery_label": "1636",
+            "top1_gallery_gps": [
+                120.37936116666667,
+                30.318650055555555
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001636\\H80.tif",
+            "s1_cosine_similarity": 0.773424506187439,
+            "d1_geodesic_distance_m": 3339.754079668061,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1854,
+            "query_label": "2874",
+            "query_gps": [
+                120.34592872222223,
+                30.31746083333333
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002874\\H100.JPG",
+            "top1_gallery_index": 9705,
+            "top1_gallery_label": "1617",
+            "top1_gallery_gps": [
+                120.37936775,
+                30.31884011111111
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001617\\H80_old.tif",
+            "s1_cosine_similarity": 0.7881317138671875,
+            "d1_geodesic_distance_m": 3216.988084999314,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1809,
+            "query_label": "2859",
+            "query_gps": [
+                120.3459398611111,
+                30.317635666666668
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002859\\H100.JPG",
+            "top1_gallery_index": 9818,
+            "top1_gallery_label": "1636",
+            "top1_gallery_gps": [
+                120.37936116666667,
+                30.318650055555555
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001636\\H80.tif",
+            "s1_cosine_similarity": 0.7505857348442078,
+            "d1_geodesic_distance_m": 3213.603691911915,
+            "is_label_match": false
+        },
+        {
+            "query_index": 2139,
+            "query_label": "2969",
+            "query_gps": [
+                120.34447883333333,
+                30.316391444444445
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002969\\H100.JPG",
+            "top1_gallery_index": 9712,
+            "top1_gallery_label": "1618",
+            "top1_gallery_gps": [
+                120.37916108333333,
+                30.318839694444446
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001618\\H90.tif",
+            "s1_cosine_similarity": 0.7129678726196289,
+            "d1_geodesic_distance_m": 3343.932212179405,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1812,
+            "query_label": "2860",
+            "query_gps": [
+                120.34572963888888,
+                30.31763502777778
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002860\\H100.JPG",
+            "top1_gallery_index": 9601,
+            "top1_gallery_label": "1600",
+            "top1_gallery_gps": [
+                120.37893597222222,
+                30.319008083333333
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001600\\H100_old.tif",
+            "s1_cosine_similarity": 0.7391912937164307,
+            "d1_geodesic_distance_m": 3194.614203349304,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1818,
+            "query_label": "2862",
+            "query_gps": [
+                120.34531263888888,
+                30.317636027777777
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002862\\H100.JPG",
+            "top1_gallery_index": 9704,
+            "top1_gallery_label": "1617",
+            "top1_gallery_gps": [
+                120.37936775,
+                30.31884011111111
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001617\\H80.tif",
+            "s1_cosine_similarity": 0.7208826541900635,
+            "d1_geodesic_distance_m": 3275.265331772238,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1851,
+            "query_label": "2873",
+            "query_gps": [
+                120.34572052777777,
+                30.31745888888889
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002873\\H100.JPG",
+            "top1_gallery_index": 9819,
+            "top1_gallery_label": "1636",
+            "top1_gallery_gps": [
+                120.37936116666667,
+                30.318650055555555
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001636\\H80_old.tif",
+            "s1_cosine_similarity": 0.7288343906402588,
+            "d1_geodesic_distance_m": 3235.417258343898,
+            "is_label_match": false
+        },
+        {
+            "query_index": 2230,
+            "query_label": "2999",
+            "query_gps": [
+                120.34512116666667,
+                30.316210527777777
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002999\\H80.JPG",
+            "top1_gallery_index": 10424,
+            "top1_gallery_label": "1737",
+            "top1_gallery_gps": [
+                120.37554216666666,
+                30.31918738888889
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001737\\H80.tif",
+            "s1_cosine_similarity": 0.7821668982505798,
+            "d1_geodesic_distance_m": 2942.0406786349213,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1848,
+            "query_label": "2872",
+            "query_gps": [
+                120.34551397222222,
+                30.317457416666667
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002872\\H100.JPG",
+            "top1_gallery_index": 9820,
+            "top1_gallery_label": "1636",
+            "top1_gallery_gps": [
+                120.37936116666667,
+                30.318650055555555
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001636\\H90.tif",
+            "s1_cosine_similarity": 0.7018188238143921,
+            "d1_geodesic_distance_m": 3255.256353684264,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1815,
+            "query_label": "2861",
+            "query_gps": [
+                120.345521,
+                30.317635916666667
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002861\\H100.JPG",
+            "top1_gallery_index": 9611,
+            "top1_gallery_label": "1601",
+            "top1_gallery_gps": [
+                120.37914355555556,
+                30.319009444444443
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001601\\H90_old.tif",
+            "s1_cosine_similarity": 0.7018548846244812,
+            "d1_geodesic_distance_m": 3234.568196520129,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1814,
+            "query_label": "2860",
+            "query_gps": [
+                120.34572963888888,
+                30.31763502777778
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002860\\H90.JPG",
+            "top1_gallery_index": 9610,
+            "top1_gallery_label": "1601",
+            "top1_gallery_gps": [
+                120.37914355555556,
+                30.319009444444443
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001601\\H90.tif",
+            "s1_cosine_similarity": 0.70058274269104,
+            "d1_geodesic_distance_m": 3214.5463620632027,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1423,
+            "query_label": "2730",
+            "query_gps": [
+                120.378145,
+                30.323616666666666
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002730\\H80.JPG",
+            "top1_gallery_index": 4361,
+            "top1_gallery_label": "726",
+            "top1_gallery_gps": [
+                120.35582316666667,
+                30.322780416666667
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\000726\\H90_old.tif",
+            "s1_cosine_similarity": 0.7308985590934753,
+            "d1_geodesic_distance_m": 2146.924239513843,
+            "is_label_match": false
+        },
+        {
+            "query_index": 663,
+            "query_label": "2477",
+            "query_gps": [
+                120.33779411111111,
+                30.317647333333333
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002477\\H100.JPG",
+            "top1_gallery_index": 6092,
+            "top1_gallery_label": "1015",
+            "top1_gallery_gps": [
+                120.35922883333333,
+                30.322106694444443
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001015\\H80.tif",
+            "s1_cosine_similarity": 0.7308154106140137,
+            "d1_geodesic_distance_m": 2118.708146066382,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1642,
+            "query_label": "2803",
+            "query_gps": [
+                120.377294,
+                30.3226895
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002803\\H80.JPG",
+            "top1_gallery_index": 4361,
+            "top1_gallery_label": "726",
+            "top1_gallery_gps": [
+                120.35582316666667,
+                30.322780416666667
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\000726\\H90_old.tif",
+            "s1_cosine_similarity": 0.7402944564819336,
+            "d1_geodesic_distance_m": 2063.167066011023,
+            "is_label_match": false
+        },
+        {
+            "query_index": 405,
+            "query_label": "2391",
+            "query_gps": [
+                120.33540419444445,
+                30.322991777777776
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002391\\H100.JPG",
+            "top1_gallery_index": 6793,
+            "top1_gallery_label": "1132",
+            "top1_gallery_gps": [
+                120.35582091666667,
+                30.315506555555555
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001132\\H100_old.tif",
+            "s1_cosine_similarity": 0.7097583413124084,
+            "d1_geodesic_distance_m": 2131.5359415850094,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1525,
+            "query_label": "2764",
+            "query_gps": [
+                120.37814513888888,
+                30.323238916666668
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002764\\H80.JPG",
+            "top1_gallery_index": 4259,
+            "top1_gallery_label": "709",
+            "top1_gallery_gps": [
+                120.35580961111111,
+                30.322585583333332
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\000709\\H90_old.tif",
+            "s1_cosine_similarity": 0.7030208110809326,
+            "d1_geodesic_distance_m": 2147.4591620059487,
+            "is_label_match": false
+        },
+        {
+            "query_index": 403,
+            "query_label": "2390",
+            "query_gps": [
+                120.33561275,
+                30.32299261111111
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002390\\H80.JPG",
+            "top1_gallery_index": 6793,
+            "top1_gallery_label": "1132",
+            "top1_gallery_gps": [
+                120.35582091666667,
+                30.315506555555555
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001132\\H100_old.tif",
+            "s1_cosine_similarity": 0.7037492394447327,
+            "d1_geodesic_distance_m": 2113.1408533691897,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1204,
+            "query_label": "2657",
+            "query_gps": [
+                120.37917880555555,
+                30.324306
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002657\\H80.JPG",
+            "top1_gallery_index": 1801,
+            "top1_gallery_label": "300",
+            "top1_gallery_gps": [
+                120.3834993611111,
+                30.31050336111111
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\000300\\H100_old.tif",
+            "s1_cosine_similarity": 0.7154825329780579,
+            "d1_geodesic_distance_m": 1591.6094652241636,
+            "is_label_match": false
+        },
+        {
+            "query_index": 2242,
+            "query_label": "3003",
+            "query_gps": [
+                120.34448913888889,
+                30.316028666666668
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\003003\\H80.JPG",
+            "top1_gallery_index": 4640,
+            "top1_gallery_label": "773",
+            "top1_gallery_gps": [
+                120.35662638888888,
+                30.323335416666666
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\000773\\H80.tif",
+            "s1_cosine_similarity": 0.7261883020401001,
+            "d1_geodesic_distance_m": 1421.925695441187,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1719,
+            "query_label": "2829",
+            "query_gps": [
+                120.37874163888888,
+                30.322496277777777
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002829\\H100.JPG",
+            "top1_gallery_index": 1454,
+            "top1_gallery_label": "242",
+            "top1_gallery_gps": [
+                120.38495763888889,
+                30.31105136111111
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\000242\\H80.tif",
+            "s1_cosine_similarity": 0.7084285020828247,
+            "d1_geodesic_distance_m": 1407.1220423101515,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1200,
+            "query_label": "2656",
+            "query_gps": [
+                120.37938802777778,
+                30.324306833333335
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002656\\H100.JPG",
+            "top1_gallery_index": 11686,
+            "top1_gallery_label": "1947",
+            "top1_gallery_gps": [
+                120.39134777777778,
+                30.3181125
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001947\\H90.tif",
+            "s1_cosine_similarity": 0.7384932041168213,
+            "d1_geodesic_distance_m": 1340.2321052778075,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1953,
+            "query_label": "2907",
+            "query_gps": [
+                120.34571947222223,
+                30.317113833333334
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002907\\H100.JPG",
+            "top1_gallery_index": 5334,
+            "top1_gallery_label": "889",
+            "top1_gallery_gps": [
+                120.35640966666666,
+                30.324720361111112
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\000889\\H100.tif",
+            "s1_cosine_similarity": 0.7323470115661621,
+            "d1_geodesic_distance_m": 1331.2495946028184,
+            "is_label_match": false
+        },
+        {
+            "query_index": 206,
+            "query_label": "2324",
+            "query_gps": [
+                120.33540008333334,
+                30.32355738888889
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002324\\H90.JPG",
+            "top1_gallery_index": 18046,
+            "top1_gallery_label": "3007",
+            "top1_gallery_gps": [
+                120.34531944444444,
+                30.316024
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\003007\\H90.tif",
+            "s1_cosine_similarity": 0.7658064961433411,
+            "d1_geodesic_distance_m": 1269.5797324799034,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1955,
+            "query_label": "2907",
+            "query_gps": [
+                120.34571947222223,
+                30.317113833333334
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002907\\H90.JPG",
+            "top1_gallery_index": 5334,
+            "top1_gallery_label": "889",
+            "top1_gallery_gps": [
+                120.35640966666666,
+                30.324720361111112
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\000889\\H100.tif",
+            "s1_cosine_similarity": 0.7290389537811279,
+            "d1_geodesic_distance_m": 1331.2495946028184,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1201,
+            "query_label": "2656",
+            "query_gps": [
+                120.37938802777778,
+                30.324306833333335
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002656\\H80.JPG",
+            "top1_gallery_index": 11682,
+            "top1_gallery_label": "1947",
+            "top1_gallery_gps": [
+                120.39134777777778,
+                30.3181125
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001947\\H100.tif",
+            "s1_cosine_similarity": 0.7208997011184692,
+            "d1_geodesic_distance_m": 1340.2321052778075,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1263,
+            "query_label": "2677",
+            "query_gps": [
+                120.37939327777778,
+                30.324134472222223
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002677\\H100.JPG",
+            "top1_gallery_index": 11279,
+            "top1_gallery_label": "1879",
+            "top1_gallery_gps": [
+                120.3913513611111,
+                30.318828777777778
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001879\\H90_old.tif",
+            "s1_cosine_similarity": 0.7393738031387329,
+            "d1_geodesic_distance_m": 1291.9783010931717,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1150,
+            "query_label": "2639",
+            "query_gps": [
+                120.37856602777778,
+                30.324492055555556
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002639\\H80.JPG",
+            "top1_gallery_index": 12622,
+            "top1_gallery_label": "2103",
+            "top1_gallery_gps": [
+                120.3704135,
+                30.31516047222222
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\002103\\H90.tif",
+            "s1_cosine_similarity": 0.7044326066970825,
+            "d1_geodesic_distance_m": 1301.0762989868201,
+            "is_label_match": false
+        },
+        {
+            "query_index": 303,
+            "query_label": "2357",
+            "query_gps": [
+                120.33541672222222,
+                30.32337272222222
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002357\\H100.JPG",
+            "top1_gallery_index": 18184,
+            "top1_gallery_label": "3030",
+            "top1_gallery_gps": [
+                120.34574822222223,
+                30.315842166666666
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\003030\\H90.tif",
+            "s1_cosine_similarity": 0.7023941278457642,
+            "d1_geodesic_distance_m": 1299.3750094617167,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1355,
+            "query_label": "2707",
+            "query_gps": [
+                120.37856736111111,
+                30.323784694444445
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002707\\H90.JPG",
+            "top1_gallery_index": 12380,
+            "top1_gallery_label": "2063",
+            "top1_gallery_gps": [
+                120.36917713888889,
+                30.315532027777778
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\002063\\H80.tif",
+            "s1_cosine_similarity": 0.7066329717636108,
+            "d1_geodesic_distance_m": 1287.7086915466718,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1537,
+            "query_label": "2768",
+            "query_gps": [
+                120.37731163888888,
+                30.32324102777778
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002768\\H80.JPG",
+            "top1_gallery_index": 7827,
+            "top1_gallery_label": "1304",
+            "top1_gallery_gps": [
+                120.37494975,
+                30.312189888888888
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001304\\H80_old.tif",
+            "s1_cosine_similarity": 0.7265823483467102,
+            "d1_geodesic_distance_m": 1250.9690189376327,
+            "is_label_match": false
+        },
+        {
+            "query_index": 2316,
+            "query_label": "3028",
+            "query_gps": [
+                120.34616786111111,
+                30.315842611111112
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\003028\\H100.JPG",
+            "top1_gallery_index": 14004,
+            "top1_gallery_label": "2334",
+            "top1_gallery_gps": [
+                120.33747930555556,
+                30.323575583333334
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\002334\\H100.tif",
+            "s1_cosine_similarity": 0.7541190385818481,
+            "d1_geodesic_distance_m": 1199.211848769779,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1992,
+            "query_label": "2920",
+            "query_gps": [
+                120.34738530555556,
+                30.316933638888887
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002920\\H100.JPG",
+            "top1_gallery_index": 14179,
+            "top1_gallery_label": "2363",
+            "top1_gallery_gps": [
+                120.33645333333334,
+                30.323193833333335
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\002363\\H100_old.tif",
+            "s1_cosine_similarity": 0.7101166248321533,
+            "d1_geodesic_distance_m": 1260.6215632645199,
+            "is_label_match": false
+        },
+        {
+            "query_index": 1639,
+            "query_label": "2802",
+            "query_gps": [
+                120.37730155555556,
+                30.322870833333333
+            ],
+            "query_path": "datasets\\DenseUAV\\test\\query_drone\\002802\\H80.JPG",
+            "top1_gallery_index": 7827,
+            "top1_gallery_label": "1304",
+            "top1_gallery_gps": [
+                120.37494975,
+                30.312189888888888
+            ],
+            "top1_gallery_path": "datasets\\DenseUAV\\test\\gallery_satellite\\001304\\H80_old.tif",
+            "s1_cosine_similarity": 0.7343606948852539,
+            "d1_geodesic_distance_m": 1210.2849683812947,
+            "is_label_match": false
+        }
+    ]
+}

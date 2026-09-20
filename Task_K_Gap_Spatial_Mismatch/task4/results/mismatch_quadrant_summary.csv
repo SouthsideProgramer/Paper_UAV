@@ -1,0 +1,6 @@
+Category,Condition,Count,Percent_of_Total
+High_Conf_Correct,s1>=0.7 and d1<200.0m,200,8.58
+High_Conf_Mismatch_SPATIAL_GAP,s1>=0.7 and d1>=200.0m,79,3.39
+Low_Conf_Error,s1<0.7 and d1>=200.0m,1260,54.05
+Low_Conf_Correct,s1<0.7 and d1<200.0m,792,33.98
+Severe_Mismatch_CrossCampus,s1>=0.7 and d1>=1000m,55,2.36
