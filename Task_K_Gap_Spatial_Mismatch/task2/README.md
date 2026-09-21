@@ -1,7 +1,7 @@
 # Task 2: Đo lường Độ Phân Tán Không Gian trong Top-K (Spatial Dispersion Analysis)
 
 ## 1. Mục tiêu Nghiên cứu & Giả thuyết
-Thực nghiệm Task 2 nhằm kiểm chứng luận điểm thứ hai của **Research Gap 1 (Spatial Mismatch)**:
+Thực nghiệm Task 2 nhằm kiểm chứng luận điểm thứ hai của **Research Gap Spatial Mismatch**:
 * **Hiện tượng Phân mảnh Không gian (Spatial Dispersion / Fragmentation):** Trong các mô hình UAV Visual Geo-localization truyền thống, các ứng viên trong Top-$K$ ($K=3, 5, 10$) tuy có điểm số tương đồng thị giác xấp xỉ nhau ($s_i \approx s_j$), nhưng thực tế ngoài thực địa lại **bị phân tán rải rác trên khắp bản đồ** với bán kính hàng kilomet thay vì gom tụ chặt chẽ thành cụm cục bộ (compact spatial cluster) quanh vị trí thực tế của UAV.
 * **Hậu quả:** Sự phân tán này là nguyên nhân trực tiếp khiến các phương pháp gán tọa độ hoặc kết hợp Top-$K$ (như Weighted Centroid) bị kéo lệch vào các tọa độ "ảo" ở giữa các cụm cách xa nhau.
 

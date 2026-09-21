@@ -1,7 +1,7 @@
 # Task 1: Phân tích Sự Phá Vỡ Thứ Hạng Không Gian (Visual Rank vs. Spatial Distance Monotonicity Breakdown)
 
 ## 1. Mục tiêu Nghiên cứu
-Thực nghiệm Task 1 nhằm kiểm chứng giả thuyết cốt lõi của **Research Gap 1 (Spatial Mismatch)**:
+Thực nghiệm Task 1 nhằm kiểm chứng giả thuyết cốt lõi của **Research Gap Spatial Mismatch**:
 1. **Điểm tương đồng thị giác ($S_{visual}$) không bảo toàn quan hệ lân cận địa lý ($d_{geo}$)**: Việc sắp xếp ứng viên vệ tinh theo độ tương đồng Cosine không đồng nhất với khoảng cách thực tế tính bằng mét tới drone.
 2. **Sự bùng nổ nghịch đảo khoảng cách (Spatial Inversion)**: Trong Top-$K$ ứng viên có điểm số thị giác cao nhất, các ứng viên xếp sau (điểm thấp hơn) lại thường xuyên nằm gần vị trí drone hơn các ứng viên xếp trước.
 

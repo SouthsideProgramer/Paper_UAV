@@ -1,10 +1,10 @@
-# README: Thẩm định Thực nghiệm Research Gap 1 (Spatial Mismatch) trên DenseUAV
+# README: Thẩm định Thực nghiệm Research Gap Spatial Mismatch trên DenseUAV
 
 ## 1. Mục tiêu Nghiên cứu & Phạm vi
 
-* **Mục tiêu:** Chứng minh thực nghiệm rằng **Research Gap 1 (Spatial Mismatch) là ĐÚNG ĐẮN VÀ CẤP THIẾT**:
-  1. *Visual Rank vs. Spatial Distance Inversion (Sự phá vỡ thứ hạng không gian):* Điểm tương đồng thị giác ($S_{visual}$) không phản ánh và không bảo toàn thứ tự lân cận địa lý ($d_{geo}$). Thứ bậc thị giác trong Top-$K$ hoàn toàn lệch pha so với khoảng cách mét thực địa, dẫn đến tỷ lệ nghịch đảo khoảng cách rất cao ($> 90\%$ số truy vấn).
-  2. *Spatial Dispersion & Fragmentation (Hiện tượng phân mảnh không gian):* Các ứng viên trong Top-$K$ dù có điểm tương đồng thị giác xấp xỉ nhau ($s_i \approx s_j$) nhưng ngoài thực địa lại bị xé lẻ rải rác trên khắp bản đồ thành phố (bán kính phân tán trung bình $> 1.8\text{ km}$, với hơn $62\%$ số cụm Top-5 bị xé lẻ xuyên khuôn viên trường đại học) thay vì tụ lại quanh vị trí của UAV.
+* **Mục tiêu:** Chứng minh thực nghiệm rằng **Research Gap Spatial Mismatch là ĐÚNG ĐẮN VÀ CẤP THIẾT**:
+  1. *Visual Rank vs. Spatial Distance Inversion (Sự phá vỡ thứ hạng không gian):* Sự tương đồng thị giác ($S_{visual}$) không phản ánh và bảo toàn thứ tự lân cận địa lý ($d_{geo}$). Thứ bậc thị giác trong Top-$K$ hoàn toàn lệch pha so với khoảng cách mét thực địa, dẫn đến tỷ lệ nghịch đảo khoảng cách rất cao ($> 90\%$ số truy vấn).
+  2. *Spatial Dispersion & Fragmentation (Hiện tượng phân mảnh không gian):* Các candidate trong Top-$K$ dù có điểm tương đồng thị giác xấp xỉ nhau ($s_i \approx s_j$) nhưng ngoài thực địa lại bị xé lẻ rải rác trên khắp bản đồ thành phố (bán kính phân tán trung bình $> 1.8\text{ km}$, với hơn $62\%$ số cụm Top-5 bị xé lẻ xuyên khuôn viên trường đại học) thay vì tụ lại quanh vị trí của UAV.
   3. *Naive Weighted Centroid Crash (Sự sụp đổ của phép nội suy trọng tâm ngây thơ):* Mọi cơ chế kết hợp tọa độ Top-$K$ ngây thơ bằng hàm Softmax điểm số thị giác đều kéo vị trí ước lượng rơi vào các tọa độ "ảo" (phantom coordinates) giữa các trường đại học, làm bùng nổ sai số và khiến hơn $55\% - 74\%$ số truy vấn bị suy thoái độ chính xác so với việc giữ nguyên Top-1.
   4. *Overconfident Visual Mismatch (Nghịch lý tự tin cực đoan):* Mô hình đạt độ tương đồng thị giác rất cao ($s_1 \ge 0.70 - 0.79$) nhưng thực tế lại dự đoán nhầm sang một trường đại học khác cách xa từ $2\text{ km}$ đến hơn $5.4\text{ km}$ do hiện tượng Visual Aliasing (công trình kiến trúc có hình thái tương đồng).
 

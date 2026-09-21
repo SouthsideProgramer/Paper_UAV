@@ -1,7 +1,7 @@
 # Task 4: Khai thác Mẫu Lỗi Tự Tin Cực Đoan (High-Confidence Visual Mismatch Identification)
 
 ## 1. Mục tiêu Nghiên cứu
-Thực nghiệm Task 4 nhằm trực quan hóa và định lượng bằng chứng thực tế rõ ràng nhất của **Research Gap 1 (Spatial Mismatch)**:
+Thực nghiệm Task 4 nhằm trực quan hóa và định lượng bằng chứng thực tế rõ ràng nhất của **Research Gap Spatial Mismatch**:
 * **Nghịch lý Tự tin Cực đoan (Overconfident Visual Mismatch):** Mô hình đạt độ tương đồng thị giác cực cao ($s_1 \ge 0.70$ và lên tới xấp xỉ $0.80$), biểu thị sự tự tin tuyệt đối vào kết quả ghép cặp, nhưng thực tế drone và tile vệ tinh lại **nằm ở hai khuôn viên trường đại học hoàn toàn khác nhau cách xa hơn 5 km**!
 * **Ý nghĩa:** Chứng minh rằng các mô hình nhúng đặc trưng thuần túy (như ViT, ResNet) chỉ học các đặc trưng hoa văn lặp lại của các công trình kiến trúc (mái nhà đỏ, sân bóng, hàng cây, đường pitch) mà hoàn toàn "mù" về mặt không gian địa lý.
 

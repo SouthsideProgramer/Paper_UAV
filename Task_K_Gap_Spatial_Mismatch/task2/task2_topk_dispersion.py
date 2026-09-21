@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Task 2: Top-K Spatial Dispersion Analysis
-Research Gap 1: Spatial Mismatch on DenseUAV Benchmark
+Research Gap: Spatial Mismatch on DenseUAV Benchmark
 
 Quantifies:
 1. Maximum Top-K cluster diameter D_max = max_{i,j} Haversine(p_i, p_j) for K in {3, 5, 10}.

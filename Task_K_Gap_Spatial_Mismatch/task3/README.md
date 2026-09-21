@@ -1,7 +1,7 @@
 # Task 3: Đánh giá Thực nghiệm Cơ chế Centroid Ngây Thơ (Naive Weighted Centroid Failure)
 
 ## 1. Mục tiêu Nghiên cứu & Giả thuyết
-Thực nghiệm Task 3 nhằm chứng minh thực nghiệm luận điểm thứ ba của **Research Gap 1 (Spatial Mismatch)**:
+Thực nghiệm Task 3 nhằm chứng minh thực nghiệm luận điểm thứ ba của **Research Gap Spatial Mismatch**:
 * **Sự sụp đổ của phép nội suy trọng tâm Top-$K$ ngây thơ (Naive Weighted Centroid Crash):** Trong bài toán định vị UAV liên góc nhìn, một hướng tiếp cận trực giác thường được cân nhắc là: thay vì chỉ lấy duy nhất tọa độ của ứng viên Top-1, ta có thể lấy tổ hợp trọng tâm (Weighted Centroid) của Top-$K$ ứng viên có điểm số thị giác cao nhất với trọng số Softmax theo điểm cosine $s_i$.
 * **Hậu quả thực tế:** Do **Spatial Mismatch (Task 1)** và **Spatial Dispersion (Task 2)**, các ứng viên trong Top-$K$ thực chất nằm rải rác ở các khuôn viên cách xa nhau hàng kilomet. Khi gán trọng số ngây thơ, phép nội suy tọa độ phẳng kéo vị trí ước lượng rơi vào một **tọa độ "ảo" (phantom coordinate)** nằm ở khoảng trống giữa các trường đại học (hồ nước, rừng cây, cao tốc), dẫn đến **sai số định vị bùng nổ và suy thoái độ chính xác trên đa số truy vấn**.
 
