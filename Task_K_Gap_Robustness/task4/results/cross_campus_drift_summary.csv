@@ -1,0 +1,5 @@
+model_name,total_queries,drift_threshold_m,cross_campus_drift_count,cross_campus_drift_percent,mean_drift_error_m,max_drift_error_m,drift_gt_2000m_count,drift_gt_3000m_count,drift_gt_4000m_count,mean_drift_cosine_similarity
+FSRA,2331,1000.0,295,12.66,2914.34,5375.08,184,140,79,0.5971
+Baseline,2331,1000.0,1082,46.42,2818.99,5431.61,688,489,228,0.5925
+ResNet50,2331,1000.0,570,24.45,2499.91,5375.86,322,180,87,0.5301
+LPN,2331,1000.0,272,11.67,2838.36,5414.59,174,129,65,0.6001

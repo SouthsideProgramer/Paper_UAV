@@ -1,0 +1,15 @@
+distance_m,sdm_theoretical_score,sdm_percent,abs_derivative_per_m,sensitivity_status
+0,1.0,100.0,0.04831408,High Sensitivity
+5,0.78539351,78.539351,0.03794556,High Sensitivity
+10,0.61684296,61.684296,0.0298022,High Sensitivity
+20,0.38049524,38.049524,0.01838328,Steep Cliff Drop
+30,0.23470581,23.470581,0.0113396,Steep Cliff Drop
+50,0.08930445,8.930445,0.00431466,Steep Cliff Drop
+75,0.02668761,2.668761,0.00128939,Steep Cliff Drop
+100,0.00797528,0.797528,0.00038532,Vanishing Sensitivity (< 1% signal)
+150,0.00071223,0.071223,3.441e-05,Vanishing Sensitivity (< 1% signal)
+200,6.361e-05,0.006361,3.07e-06,Vanishing Sensitivity (< 1% signal)
+300,5.1e-07,5.1e-05,2e-08,Vanishing Sensitivity (< 1% signal)
+500,0.0,0.0,0.0,Vanishing Sensitivity (< 1% signal)
+1000,0.0,0.0,0.0,Completely Flat (Zero Sensitivity: 0.0000)
+1500,0.0,0.0,0.0,Completely Flat (Zero Sensitivity: 0.0000)

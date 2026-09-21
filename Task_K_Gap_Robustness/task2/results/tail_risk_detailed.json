@@ -1,0 +1,326 @@
+[
+    {
+        "model_name": "Baseline",
+        "num_queries": 2331,
+        "R@1_percent": 19.26,
+        "R@5_percent": 38.1,
+        "SDM@1_percent": 23.53,
+        "mean_error_m": 1390.5,
+        "std_error_m": 1615.83,
+        "p50_median_m": 751.1,
+        "p50_median_ci95": [
+            634.7,
+            912.49
+        ],
+        "p75_m": 2589.17,
+        "p90_m": 3989.39,
+        "p90_ci95": [
+            3903.71,
+            4048.73
+        ],
+        "p95_m": 4757.74,
+        "p95_ci95": [
+            4596.17,
+            4857.39
+        ],
+        "p99_m": 5214.73,
+        "max_error_m": 5431.61,
+        "gfr_metrics": {
+            "GFR@50": {
+                "rate_percent": 67.7,
+                "ci_95": [
+                    65.77,
+                    69.56
+                ],
+                "num_failures": 1578,
+                "total_queries": 2331
+            },
+            "GFR@100": {
+                "rate_percent": 63.02,
+                "ci_95": [
+                    61.04,
+                    64.96
+                ],
+                "num_failures": 1469,
+                "total_queries": 2331
+            },
+            "GFR@200": {
+                "rate_percent": 57.44,
+                "ci_95": [
+                    55.43,
+                    59.44
+                ],
+                "num_failures": 1339,
+                "total_queries": 2331
+            },
+            "GFR@500": {
+                "rate_percent": 54.14,
+                "ci_95": [
+                    52.11,
+                    56.15
+                ],
+                "num_failures": 1262,
+                "total_queries": 2331
+            },
+            "GFR@1000": {
+                "rate_percent": 46.42,
+                "ci_95": [
+                    44.4,
+                    48.45
+                ],
+                "num_failures": 1082,
+                "total_queries": 2331
+            }
+        },
+        "GFR@100_percent": 63.02,
+        "GFR@100_ci95": [
+            61.04,
+            64.96
+        ],
+        "catastrophic_drift_gt1000m_count": 1082,
+        "catastrophic_drift_gt1000m_percent": 46.42
+    },
+    {
+        "model_name": "FSRA",
+        "num_queries": 2331,
+        "R@1_percent": 64.48,
+        "R@5_percent": 82.58,
+        "SDM@1_percent": 68.51,
+        "mean_error_m": 396.16,
+        "std_error_m": 1083.03,
+        "p50_median_m": 0.0,
+        "p50_median_ci95": [
+            0.0,
+            0.0
+        ],
+        "p75_m": 40.02,
+        "p90_m": 1446.26,
+        "p90_ci95": [
+            1273.73,
+            1691.92
+        ],
+        "p95_m": 3557.24,
+        "p95_ci95": [
+            3080.22,
+            3789.77
+        ],
+        "p99_m": 5102.0,
+        "max_error_m": 5375.08,
+        "gfr_metrics": {
+            "GFR@50": {
+                "rate_percent": 22.48,
+                "ci_95": [
+                    20.83,
+                    24.22
+                ],
+                "num_failures": 524,
+                "total_queries": 2331
+            },
+            "GFR@100": {
+                "rate_percent": 19.05,
+                "ci_95": [
+                    17.5,
+                    20.69
+                ],
+                "num_failures": 444,
+                "total_queries": 2331
+            },
+            "GFR@200": {
+                "rate_percent": 15.83,
+                "ci_95": [
+                    14.4,
+                    17.37
+                ],
+                "num_failures": 369,
+                "total_queries": 2331
+            },
+            "GFR@500": {
+                "rate_percent": 14.5,
+                "ci_95": [
+                    13.13,
+                    15.99
+                ],
+                "num_failures": 338,
+                "total_queries": 2331
+            },
+            "GFR@1000": {
+                "rate_percent": 12.66,
+                "ci_95": [
+                    11.37,
+                    14.07
+                ],
+                "num_failures": 295,
+                "total_queries": 2331
+            }
+        },
+        "GFR@100_percent": 19.05,
+        "GFR@100_ci95": [
+            17.5,
+            20.69
+        ],
+        "catastrophic_drift_gt1000m_count": 295,
+        "catastrophic_drift_gt1000m_percent": 12.66
+    },
+    {
+        "model_name": "ResNet50",
+        "num_queries": 2331,
+        "R@1_percent": 41.36,
+        "R@5_percent": 63.53,
+        "SDM@1_percent": 48.33,
+        "mean_error_m": 657.35,
+        "std_error_m": 1208.31,
+        "p50_median_m": 20.07,
+        "p50_median_ci95": [
+            19.97,
+            20.27
+        ],
+        "p75_m": 935.93,
+        "p90_m": 2351.4,
+        "p90_ci95": [
+            2187.26,
+            2657.44
+        ],
+        "p95_m": 3756.63,
+        "p95_ci95": [
+            3437.63,
+            3883.49
+        ],
+        "p99_m": 5128.72,
+        "max_error_m": 5375.86,
+        "gfr_metrics": {
+            "GFR@50": {
+                "rate_percent": 37.02,
+                "ci_95": [
+                    35.09,
+                    39.0
+                ],
+                "num_failures": 863,
+                "total_queries": 2331
+            },
+            "GFR@100": {
+                "rate_percent": 33.5,
+                "ci_95": [
+                    31.62,
+                    35.45
+                ],
+                "num_failures": 781,
+                "total_queries": 2331
+            },
+            "GFR@200": {
+                "rate_percent": 30.63,
+                "ci_95": [
+                    28.79,
+                    32.53
+                ],
+                "num_failures": 714,
+                "total_queries": 2331
+            },
+            "GFR@500": {
+                "rate_percent": 28.01,
+                "ci_95": [
+                    26.23,
+                    29.87
+                ],
+                "num_failures": 653,
+                "total_queries": 2331
+            },
+            "GFR@1000": {
+                "rate_percent": 24.45,
+                "ci_95": [
+                    22.75,
+                    26.24
+                ],
+                "num_failures": 570,
+                "total_queries": 2331
+            }
+        },
+        "GFR@100_percent": 33.5,
+        "GFR@100_ci95": [
+            31.62,
+            35.45
+        ],
+        "catastrophic_drift_gt1000m_count": 570,
+        "catastrophic_drift_gt1000m_percent": 24.45
+    },
+    {
+        "model_name": "LPN",
+        "num_queries": 2331,
+        "R@1_percent": 67.22,
+        "R@5_percent": 84.64,
+        "SDM@1_percent": 71.04,
+        "mean_error_m": 358.92,
+        "std_error_m": 1013.99,
+        "p50_median_m": 0.0,
+        "p50_median_ci95": [
+            0.0,
+            0.0
+        ],
+        "p75_m": 27.31,
+        "p90_m": 1318.72,
+        "p90_ci95": [
+            1156.23,
+            1467.37
+        ],
+        "p95_m": 3220.78,
+        "p95_ci95": [
+            2698.26,
+            3606.86
+        ],
+        "p99_m": 4886.05,
+        "max_error_m": 5414.59,
+        "gfr_metrics": {
+            "GFR@50": {
+                "rate_percent": 20.51,
+                "ci_95": [
+                    18.92,
+                    22.19
+                ],
+                "num_failures": 478,
+                "total_queries": 2331
+            },
+            "GFR@100": {
+                "rate_percent": 17.12,
+                "ci_95": [
+                    15.64,
+                    18.7
+                ],
+                "num_failures": 399,
+                "total_queries": 2331
+            },
+            "GFR@200": {
+                "rate_percent": 14.63,
+                "ci_95": [
+                    13.25,
+                    16.12
+                ],
+                "num_failures": 341,
+                "total_queries": 2331
+            },
+            "GFR@500": {
+                "rate_percent": 13.86,
+                "ci_95": [
+                    12.51,
+                    15.32
+                ],
+                "num_failures": 323,
+                "total_queries": 2331
+            },
+            "GFR@1000": {
+                "rate_percent": 11.67,
+                "ci_95": [
+                    10.43,
+                    13.04
+                ],
+                "num_failures": 272,
+                "total_queries": 2331
+            }
+        },
+        "GFR@100_percent": 17.12,
+        "GFR@100_ci95": [
+            15.64,
+            18.7
+        ],
+        "catastrophic_drift_gt1000m_count": 272,
+        "catastrophic_drift_gt1000m_percent": 11.67
+    }
+]

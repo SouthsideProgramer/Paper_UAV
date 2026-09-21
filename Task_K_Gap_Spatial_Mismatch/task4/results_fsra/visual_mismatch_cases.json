@@ -1,0 +1,48 @@
+{
+    "metadata": {
+        "feature_mat": "../../checkpoints/vits_fsra/pytorch_result_1.mat",
+        "num_queries_evaluated": 2331,
+        "thresholds": {
+            "similarity_threshold": 0.85,
+            "distance_threshold_meters": 200.0
+        }
+    },
+    "quadrant_distribution": {
+        "high_confidence_correct": {
+            "count": 13,
+            "percent": 0.56,
+            "condition": "s1 >= 0.85 and d1 < 200.0m"
+        },
+        "high_confidence_mismatch_spatial_gap": {
+            "count": 0,
+            "percent": 0.0,
+            "condition": "s1 >= 0.85 and d1 >= 200.0m"
+        },
+        "low_confidence_error": {
+            "count": 369,
+            "percent": 15.83,
+            "condition": "s1 < 0.85 and d1 >= 200.0m"
+        },
+        "low_confidence_correct": {
+            "count": 1949,
+            "percent": 83.61,
+            "condition": "s1 < 0.85 and d1 < 200.0m"
+        }
+    },
+    "severe_mismatch_statistics": {
+        "s1_gt_thresh_and_d1_gt_500m_count": 0,
+        "s1_gt_thresh_and_d1_gt_1000m_count": 0,
+        "s1_gt_090_and_d1_gt_500m_count": 0,
+        "s1_gt_090_and_d1_gt_1000m_count": 0
+    },
+    "criteria_verification": {
+        "criterion_extreme_mismatch_exists": {
+            "condition": "Existence of cases where s1 > 0.90 (or >= 0.85) with d1 > 500m / > 1000m",
+            "observed_cases_count": 0,
+            "passed": false,
+            "interpretation": "No extreme mismatch found"
+        },
+        "gap_1_high_confidence_mismatch_proven": false
+    },
+    "top_severe_mismatch_cases": []
+}
