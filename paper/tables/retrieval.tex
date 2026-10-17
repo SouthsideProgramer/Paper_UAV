@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{Retrieval. DenseUAV: Recall@1 (\%) of our re-trained models (mean $\pm$ std over 3 seeds). AerialVL: \% frames whose top-1 tile is within 50\,m of GNSS, zero-shot $\rightarrow$ fine-tuned (val = 2023-03-11 flight; test = 2023-03-18 flights).}
+\label{tab:retrieval}
+\setlength{\tabcolsep}{3pt}
+\small
+\begin{tabular}{lcccc}
+\toprule
+ & DenseUAV & \multicolumn{3}{c}{AerialVL top-1 $\le$ 50\,m} \\
+\cmidrule(lr){3-5}
+Head & R@1 & val & test short & test long \\
+\midrule
+ViT-S, single branch & 80.1$\pm$0.4 & 21$\rightarrow$31 & 37$\rightarrow$72 & 28$\rightarrow$53 \\
+ViT-S + LPN & 85.0$\pm$1.2 & 23$\rightarrow$32 & 39$\rightarrow$73 & 29$\rightarrow$60 \\
+ViT-S + FSRA & 80.9$\pm$0.9 & 21$\rightarrow$30 & 36$\rightarrow$68 & 27$\rightarrow$54 \\
+\bottomrule
+\end{tabular}
+\end{table}

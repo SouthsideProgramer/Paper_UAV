@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{DenseUAV test campuses (semi-simulated flights over the real tile grid, real retrieval Top-$K$). p95 error in metres (\% runs lost after 30\,s); mean over 3 heads $\times$ 3 retrieval seeds $\times$ 3 trajectory seeds (27 cells of 100 flights of 300\,s).}
+\label{tab:dense}
+\setlength{\tabcolsep}{3.5pt}
+\small
+\begin{tabular}{lcccc}
+\toprule
+Method & VIO & IMU & VIO+$\epsilon_0$ & IMU+$\epsilon_0$ \\
+\midrule
+Retrieval top-1 & 501 (99) & 501 (99) & 501 (99) & 501 (99) \\
+EKF, $\chi^2$-gated & 7.2 (0) & 13 (0.3) & 104 (3) & 63 (3) \\
+PF, Top-$K$ & 6.5 (0) & 28 (5) & 14 (0.1) & 584 (56) \\
+NaviLoc$^\dagger$ \cite{shpagin2026naviloc} & 11 (0) & 263 (88) & 11 (0) & 263 (88) \\
+\textbf{MH-EKF (ours)} & \textbf{6.4} (0) & \textbf{11} (0.2) & \textbf{6.5} (0) & \textbf{12} (0.1) \\
+\bottomrule
+\end{tabular}
+\end{table}

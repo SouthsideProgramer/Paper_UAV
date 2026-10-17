@@ -1,0 +1,165 @@
+{
+  "opt": {
+    "world": "real",
+    "result_mat": "../../../DenseUAV_b8de187/checkpoints/baseline/pytorch_result_1.mat",
+    "gps_path": "../../datasets/DenseUAV/Dense_GPS_ALL.txt",
+    "preset": "fsra",
+    "motion": "vio",
+    "imu_grade": "consumer",
+    "n_traj": 100,
+    "T": 300.0,
+    "meas_every": 1,
+    "init_err": 10.0,
+    "snap": 20.0,
+    "K": 10,
+    "persist": 0.5,
+    "p_true_in_topk": 0.5,
+    "anchor_truth": 0.5,
+    "methods": "ekf_gated,pf_topk,mh_ekf",
+    "campuses": "val",
+    "seed": 0,
+    "workers": 6,
+    "n_boot": 200,
+    "tag": "F5-03_dense_val_vio_vmax0",
+    "cfg": "{\"v_max\":0.0}"
+  },
+  "cfg": {
+    "sig_p0": 15.0,
+    "sig_meas": 20.0,
+    "tau": 0.02,
+    "alpha": 1.0,
+    "disp_thr": 200.0,
+    "n_reacq": 20,
+    "sig_inflate": 50.0,
+    "n_particles": 2000,
+    "pf_eps": 0.3,
+    "pf_area": 1000000.0,
+    "pf_roughen": 2.0,
+    "pf_roughen_v": 0.05,
+    "pf_seed": 0,
+    "mh_max": 10,
+    "mh_merge": 15.0,
+    "mh_spawn_w": 0.05,
+    "v_max": 0.0,
+    "mh_lost_rule": "no_gate",
+    "mh_reach": true
+  },
+  "extra": {
+    "real_top1_categories": {
+      "correct": 0.7967,
+      "local<=100": 0.1184,
+      "far_same_campus": 0.0223,
+      "other_campus": 0.0626
+    },
+    "n_campus": 13,
+    "campus_split": {
+      "all": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "val": [
+        9,
+        10
+      ],
+      "test": [
+        11,
+        12
+      ]
+    }
+  },
+  "summary": {
+    "ekf_gated": {
+      "mean": 3.362673548028364,
+      "p50": 2.8367681230644233,
+      "p90": 6.149751675215347,
+      "p95": 7.6268610171016995,
+      "p99": 12.114542636288563,
+      "max": 38.434032753071776,
+      "traj_max_median": 10.35702398333455,
+      "traj_catastrophic_pct": 0.0,
+      "GFR@50": 0.0,
+      "GFR@100": 0.0,
+      "GFR@200": 0.0,
+      "GFR@500": 0.0,
+      "mean_ci95": [
+        3.1926641473300084,
+        3.542527339898693
+      ],
+      "p95_ci95": [
+        7.095987769488582,
+        8.117551670769052
+      ],
+      "GFR@100_ci95": [
+        0.0,
+        0.0
+      ],
+      "traj_catastrophic_pct_ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "pf_topk": {
+      "mean": 2.780390059569048,
+      "p50": 2.38159349014825,
+      "p90": 5.061363507252114,
+      "p95": 6.144001655631243,
+      "p99": 9.42003483118019,
+      "max": 36.5548208227768,
+      "traj_max_median": 9.441574022382966,
+      "traj_catastrophic_pct": 0.0,
+      "GFR@50": 0.0,
+      "GFR@100": 0.0,
+      "GFR@200": 0.0,
+      "GFR@500": 0.0,
+      "mean_ci95": [
+        2.653395502481792,
+        2.9295372196412894
+      ],
+      "p95_ci95": [
+        5.792623305755319,
+        6.573997080750351
+      ],
+      "GFR@100_ci95": [
+        0.0,
+        0.0
+      ],
+      "traj_catastrophic_pct_ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "mh_ekf": {
+      "mean": 2.8427127666971486,
+      "p50": 2.4816335104943716,
+      "p90": 5.087926864864428,
+      "p95": 6.140997768736688,
+      "p99": 9.673367302856047,
+      "max": 38.434032753071776,
+      "traj_max_median": 9.364625478549405,
+      "traj_catastrophic_pct": 0.0,
+      "GFR@50": 0.0,
+      "GFR@100": 0.0,
+      "GFR@200": 0.0,
+      "GFR@500": 0.0,
+      "mean_ci95": [
+        2.7002041629122835,
+        2.998574085962756
+      ],
+      "p95_ci95": [
+        5.800424377049692,
+        6.482964906214283
+      ],
+      "GFR@100_ci95": [
+        0.0,
+        0.0
+      ],
+      "traj_catastrophic_pct_ci95": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "paired_diffs": {}
+}

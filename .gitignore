@@ -143,3 +143,25 @@ train/
 Dense_GPS_*.txt
 
 task_khai.txt
+# DenseUAV dataset (tải từ HuggingFace, không được public lại — docs/Request.md)
+datasets/DenseUAV/
+datasets/*.zip
+datasets/parts/
+datasets/AerialVL/VAL/
+datasets/AerialVL/extracted/
+datasets/AerialVL/peek/
+datasets/AerialVL/*.log
+
+# Task F / paper: large or regenerable artefacts (features, per-run errors, crops, fine-tuned checkpoint copies)
+*.npz
+Task_F_Fusion/**/results/**/*.png
+Task_F_Fusion/aerialvl/ft/*/*
+!Task_F_Fusion/aerialvl/ft/*/ft_log.json
+# LaTeX build files (main.pdf is kept)
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.out
+paper/*.synctex.gz

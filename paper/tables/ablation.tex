@@ -1,0 +1,31 @@
+\begin{table*}[t]
+\centering
+\caption{Ablation of MH-EKF (one factor changed at a time; LPN head, 3 seeds; test data, analysis only --- the design was frozen on validation data before). p95 error in metres (\% runs lost). $^\blacktriangle$/$^\triangledown$: p95 at least 10\,\% worse/better than the full method. --: run not available.}
+\label{tab:ablation}
+\setlength{\tabcolsep}{3.5pt}
+\small
+\begin{tabular}{lcccccccc}
+\toprule
+ & \multicolumn{4}{c}{AerialVL long flights, fine-tuned retrieval} & \multicolumn{4}{c}{DenseUAV test campuses} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}
+Variant & VIO & IMU & VIO+$\epsilon_0$ & IMU+$\epsilon_0$ & VIO & IMU & VIO+$\epsilon_0$ & IMU+$\epsilon_0$ \\
+\midrule
+MH-EKF v3 (full) & 48 (2) & 180 (28) & 66 (4) & 388 (31) & 6 (0) & 11 (0) & 6 (0) & 11 (0) \\
+\midrule
+single hypothesis ($M=1$) & 49 (2) & 482$^\blacktriangle$ (29) & 752$^\blacktriangle$ (39) & 1493$^\blacktriangle$ (53) & 6 (0) & 12 (1) & 688$^\blacktriangle$ (17) & 800$^\blacktriangle$ (17) \\
+$M=3$ & 48 (2) & 230$^\blacktriangle$ (28) & 214$^\blacktriangle$ (7) & 702$^\blacktriangle$ (32) & 6 (0) & 11 (0) & 6 (0) & 11 (0) \\
+$M=5$ & 48 (2) & 209$^\blacktriangle$ (28) & 351$^\blacktriangle$ (9) & 764$^\blacktriangle$ (34) & 6 (0) & 11 (0) & 6 (0) & 11 (0) \\
+$M=20$ & 48 (2) & 164 (28) & 61 (4) & 258$^\triangledown$ (30) & 6 (0) & 11 (0) & 6 (0) & 11 (0) \\
+top-1 only ($K=1$) & 50 (3) & 246$^\blacktriangle$ (35) & 73 (6) & 356 (37) & 7 (0) & 12$^\blacktriangle$ (1) & 7 (0) & 13 (1) \\
+$K=3$ & 48 (2) & 204$^\blacktriangle$ (30) & 116$^\blacktriangle$ (6) & 369 (33) & 6 (0) & 11 (1) & 7 (0) & 12 (0) \\
+$K=5$ & 49 (2) & 182 (30) & 126$^\blacktriangle$ (6) & 412 (32) & 6 (0) & 11 (0) & 6 (0) & 11 (0) \\
+gate $\chi^2_{0.95}$ & 48 (1) & 199$^\blacktriangle$ (30) & 61 (4) & 341$^\triangledown$ (32) & 6 (0) & 11 (1) & 6 (0) & 11 (1) \\
+gate $\chi^2_{0.999}$ & 48 (2) & 103$^\triangledown$ (27) & 121$^\blacktriangle$ (5) & 612$^\blacktriangle$ (31) & 7 (0) & 12 (0) & 7 (0) & 12 (0) \\
+no gate & 49 (3) & 119$^\triangledown$ (29) & 248$^\blacktriangle$ (6) & 919$^\blacktriangle$ (32) & 7 (0) & 12 (0) & 7 (0) & 12 (0) \\
+no re-acquisition & 48 (2) & 186 (28) & 66 (4) & 395 (31) & 6 (0) & 11 (0) & 6 (0) & 11 (0) \\
+re-acq.\ anywhere & 880$^\blacktriangle$ (28) & 1273$^\blacktriangle$ (41) & 1163$^\blacktriangle$ (28) & 1535$^\blacktriangle$ (42) & 6 (0) & 11 (0) & 6 (0) & 11 (0) \\
+re-acq.\ $3\sigma+v_{\max}\Delta t$ & 53$^\blacktriangle$ (14) & 131$^\triangledown$ (32) & 167$^\blacktriangle$ (16) & 266$^\triangledown$ (35) & 6 (0) & 11 (0) & 6 (0) & 11 (0) \\
+lost rule: best child & 48 (2) & 181 (28) & 66 (4) & 388 (31) & 6 (0) & 11 (0) & 6 (0) & 11 (0) \\
+\bottomrule
+\end{tabular}
+\end{table*}
