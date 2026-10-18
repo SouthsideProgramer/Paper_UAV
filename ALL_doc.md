@@ -21,6 +21,7 @@ Luận điểm xuyên suốt: **Recall@1 và SDM không phản ánh độ an to�
 | Evaluation track (K1–K5) | `Task_K_Gap_Recall@1/` | Thêm mới |
 | Research Gap Robustness | `Task_K_Gap_Robustness/` (task1–4) | Thêm mới |
 | Research Gap Spatial Mismatch | `Task_K_Gap_Spatial_Mismatch/` (task1–4) | Thêm mới |
+| Hướng mới: fusion camera + IMU | `Task_F_Fusion/` (F1 survey, F2 prototype) | Thêm mới (2026-10-01) |
 
 Lịch sử commit liên quan:
 
@@ -155,7 +156,70 @@ Chủ yếu trên Baseline ViT-S (`data/pytorch_result.mat`), đối chứng FSR
 
 ---
 
-## 7. Lưu ý khi dùng lại
+## 7. `Task_F_Fusion/` — Hướng mới: định vị không GPS bằng fusion camera + IMU (từ 2026-10-01)
+
+Ý tưởng: dùng retrieval drone → vệ tinh đã có làm **phép đo vị trí tuyệt đối**, kết hợp với IMU/VIO làm **prior chuyển động** trong một bộ lọc, để loại các lỗi đuôi mà hai research gap đã chứng minh. Kế hoạch: mục *Hướng F* trong [`PLAN.md`](PLAN.md).
+
+### F1 — Khảo sát (`survey/fusion_survey_notes.md`)
+- Đối thủ gần nhất: **NaviLoc** (Drones, 01/2026): VPR + VIO tối ưu theo cả quỹ đạo, MLE 19.5 m. Ngoài ra có FoundLoc (2023) và **SWA-PF** (2025, cùng nhóm tác giả DenseUAV, particle filter + bản đồ ngữ nghĩa).
+- DenseUAV **không có IMU và không có chuỗi bay** → chỉ dùng cho bán mô phỏng.
+- Dataset thật ứng viên: **MAFS** (SWA-PF, video 30 fps trên 14 campus, cần kiểm tra phần public có IMU không), **Nardo-Air** (FoundLoc, có IMU), **MARS-LVIG** (có IMU + RTK nhưng không kèm ảnh vệ tinh). AerialVL không có IMU.
+- Điểm mới đề xuất: hiệp phương sai đo từ độ phân tán Top-K, gating χ², đo đa giả thuyết, đánh giá theo lỗi đuôi.
+
+### F2 — Prototype bán mô phỏng (`prototype/`, chi tiết trong `prototype/README.md`)
+Mô phỏng 14 campus theo lưới DenseUAV, quỹ đạo bay 4–8 m/s, IMU 100 Hz / VIO 10 Hz (trôi ~1.2 % quãng đường), retrieval Top-10 tổng hợp hiệu chỉnh theo K2 (FSRA, LPN, baseline 19 %, giả định 82 %). So sánh 7 phương pháp: chỉ retrieval, chỉ VIO/IMU, EKF naive / gated / dispersion-R / Top-K NN, particle filter trên Top-K. Kết quả val, p95 với FSRA + VIO: **retrieval 3416 m → EKF gated 8.3 m → PF 7.5 m**; chỉ IMU consumer: 1187 m → 18 m. Đề xuất "R theo độ phân tán Top-K" **thất bại** (tệ hơn R cố định). PF trên Top-K tốt nhất ở các kịch bản khó (retrieval yếu 49 → 11 m, aliasing kéo dài 17 → 9 m, xuất phát sai 300 m 42 → 18.5 m). Nhật ký: F2-01…F2-09 trong `EXPERIMENT_LOG.md`. ⚠ Retrieval tổng hợp; phải xác nhận bằng `.mat` thật (F3).
+
+Bổ sung (F2-10, F2-11, F3-00): PF với IMU thuần (không VIO) **thất bại** (p95 182 m so với EKF gated 18 m) → cần Rao-Blackwellized PF. Bỏ phép đo theo độ phân tán Top-K chỉ có lợi khi retrieval yếu. Trên `.mat` thật (model 19 %), tile đúng nằm trong Top-10 ở 45.5 % trường hợp top-1 sai, khớp giả định của mô phỏng. Đã kiểm tra chế độ `--world real` bằng file GPS giả; script server: `prototype/run_f3_server.sh`.
+
+**F2-12 — Multi-hypothesis EKF (`mh_ekf`), ứng viên chính:** ≤ 10 EKF song song, sinh từ các ứng viên Top-K. Không bao giờ tệ hơn EKF gated, và tốt hơn rõ ở các kịch bản khó. p95: xuất phát sai 300 m 41.7 → 8.7 m; retrieval yếu 49.3 → 13.6 m; chỉ IMU + xuất phát sai 34.8 → 16.6 m. Sau 30 s đầu không còn chuyến bay nào lệch > 100 m (EKF gated: 10–12 %).
+
+### F3 — Top-K thật với GPS thật
+`Dense_GPS_ALL.txt` có sẵn trong zip HuggingFace `Dmmm997/DenseUAV` (đã tải về `datasets/DenseUAV/`, bị gitignore). Trên `.mat` baseline 19 %: 54.6 % top-1 rơi sang campus khác, có đoạn > 20 s liền cả Top-10 ở một campus "song sinh". Dữ liệu thật lộ ra 2 lỗi của MH-EKF mà mô phỏng không bắt được; đã sửa (điều kiện mất dấu + re-acquisition giới hạn theo vùng tới được). Sau khi sửa, p95: VIO 14.2 m (gated 66.9, retrieval 4437), chỉ IMU 35.4 m (gated 172), xuất phát sai 300 m 32 m (gated 1284). ⚠ Sửa sau khi xem test → mang tính khám phá; cần val theo campus.
+
+**Giao thức val/test (F3-04):** 4 campus test của DenseUAV chia đôi theo thứ tự nhãn: val = campus 9, 10 (nhãn 2256–2632), test = campus 11, 12 (nhãn 2633–3032); model retrieval chưa thấy campus nào trong số này. Ablation trên val xác nhận cả 2 lần sửa MH-EKF (sau 30 s, % chuyến > 500 m: v0 11–17 % → v2 0–4 %) → chốt v2.
+
+### Dữ liệu & môi trường local (2026-10-01)
+- Dataset đầy đủ tải từ HF `Dmmm997/DenseUAV` (16.7 GB, public) → `datasets/DenseUAV/` (gitignore). Số ảnh khớp README.
+- Checkpoint chính thức không còn tải được (link OneDrive bị vô hiệu, Quark cần app) → train lại.
+- Env train: venv `~/.venvs/denseuav` (dựa trên env conda `libero`: torch 2.2.0+cu121, timm 0.9.10, + `pytorch-metric-learning` 2.9.0). GPU RTX 3050 8 GB; 1 epoch ViT-S ≈ 19 s.
+- Code gốc ở worktree `../DenseUAV_b8de187` (commit gốc, không sửa).
+- **Giai đoạn 0 qua cổng (E003):** ViT-S baseline train lại bằng code gốc đạt **R@1 79.67 %** (R@5 93.26, AP 68.50) → `.mat` 19.26 % cũ là checkpoint hỏng.
+
+### F3-05 — Kết quả test đầu tiên (ViT-S 79.67 %, campus test 11, 12)
+p95: VIO — retrieval 1306 m, EKF gated 7.7 m, **MH-EKF 6.4 m**; chỉ IMU — gated 13.1, **MH-EKF 11.3**; xuất phát sai 300 m — gated 682, PF 13.4, **MH-EKF 6.4**; IMU + xuất phát sai — gated 681, PF 618, **MH-EKF 11.4**. MH-EKF là phương pháp duy nhất không có chuyến bay nào lệch > 100 m sau 30 s đầu ở cả 4 kịch bản.
+
+**LPN tái lập (E004): R@1 86.36 %.** F3-06 (test, LPN): p95 MH-EKF 6.2–10.9 m ở cả 4 kịch bản, 0 % chuyến mất dấu; EKF gated 6.6–16.2 m nhưng mất dấu 3 % chuyến khi xuất phát sai.
+
+**FSRA tái lập (E005): R@1 81.85 %.** F3-07 (test, FSRA) lặp lại kết luận.
+
+#### Tổng hợp test (campus 11, 12): 3 model retrieval tái lập × 4 kịch bản
+
+p95 (m) của **MH-EKF** / EKF gated / chỉ retrieval; trong ngoặc là % chuyến bay mất dấu (> 100 m sau 30 s) của MH-EKF / EKF gated.
+
+| Model (R@1) | VIO | Chỉ IMU | Xuất phát sai 300 m | IMU + xuất phát sai |
+|---|---|---|---|---|
+| ViT-S (79.67 %) | **6.4** / 7.7 / 1306 (0 / 0) | **11.3** / 13.1 / 1306 (0 / 0) | **6.4** / 682 / 1306 (0 / 6) | **11.4** / 681 / 1306 (0 / 7) |
+| FSRA (81.85 %) | **6.8** / 7.8 / 78.7 (0 / 0) | **11.8** / 13.5 / 78.7 (0 / 0) | **6.9** / 8.5 / 78.7 (0 / 1) | **12.0** / 14.7 / 78.7 (0 / 1) |
+| LPN (86.36 %) | **6.2** / 6.6 / 77.9 (0 / 0) | **10.8** / 11.6 / 77.9 (0 / 0) | **6.3** / 8.5 / 77.9 (0 / 3) | **10.9** / 16.2 / 77.9 (0 / 3) |
+
+MH-EKF − EKF gated (p95) có CI 95 % không chứa 0 ở cả 12 ô.
+
+
+---
+
+### F4 — Kiểm tra dữ liệu thật (2026-10-01)
+
+- Kết quả kiểm tra từng dataset: `Task_F_Fusion/survey/fusion_survey_notes.md` mục 2b. MAFS và Nardo-Air bản public không có IMU; MARS-LVIG có IMU nhưng không có ảnh vệ tinh.
+- Chọn **AerialVL** (HF `hmf21/AerialVL`, MIT): 11 chuỗi bay, ảnh tên `@UTC@lon@lat@.png`, 2 bản đồ vệ tinh căn bắc. Script tải: `datasets/AerialVL/download_val.sh` (dùng `wget -c`, chạy lại sẽ tải tiếp phần còn thiếu; log ở `download.log`).
+- Đối thủ mới cần đọc: **GeoVINS** (T-RO 2025), cùng nhóm tác giả AerialVL.
+
+### F5 — Fusion trên chuyến bay thật AerialVL (`Task_F_Fusion/aerialvl/`, 2026-10-02)
+
+- Ảnh, quỹ đạo GNSS, bản đồ và retrieval là thật; IMU/VIO mô phỏng từ quỹ đạo thật. Chi tiết và giao thức val/test theo ngày bay: `Task_F_Fusion/aerialvl/README.md`.
+- Phát hiện: retrieval DenseUAV zero-shot vẫn có ích nhưng đuôi rất nặng; lệch camera ~23 m (hiệu chỉnh trên val); aliasing kéo dài tới 79 s → sửa luật tìm lại vị trí thành **MH-EKF v3** (chỉ trong 3σ), chốt trước khi chạy test.
+- E006 / F3-08 (độ vững theo seed trên DenseUAV) đã xong: bảng `Task_F_Fusion/prototype/results/F3-08_summary.md`.
+
+## 8. Lưu ý khi dùng lại
 
 - **Dữ liệu không có trong repo:** `Dense_GPS_ALL.txt` bị gitignore (không được public); `Task_K_Gap_Robustness/data/` chỉ có `test_query_list.txt`, thiếu 4 file `pytorch_result_*.mat` mà README nhắc tới → phải tự sinh bằng `test.py`. `Task_K_Gap_Spatial_Mismatch/data/pytorch_result.mat` (~43 MB) thì có commit.
 - **Đường dẫn hard-code:** README và script dùng `/media/ml4u/Extreme SSD/...` và `/home/ml4u/conda_envs/uav_env/bin/python`; `run_experiments.sh` dùng `/home/internship/...`. Script có cơ chế tìm file dự phòng (thư mục hiện tại, thư mục cha, `data/`, `checkpoints/`) vì exFAT không hỗ trợ symlink.

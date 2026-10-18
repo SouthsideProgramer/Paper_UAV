@@ -153,13 +153,46 @@ Khoảng cách descriptor phải chuẩn hóa theo diện tích mặt đất (đ
 
 ---
 
+## Hướng F — Định vị không GPS: fusion retrieval cross-view + IMU (từ 2026-10-01)
+
+**Lý do:** các research gap cho thấy retrieval có lỗi đuôi nặng (p95 cỡ 3 km, khoảng 12 % query trôi sang campus khác) và độ tự tin sai (GeoAUROC ~0.55). Một prior chuyển động từ IMU/VIO loại được các bước nhảy vô lý về vật lý. Chi tiết khảo sát: [`Task_F_Fusion/survey/fusion_survey_notes.md`](Task_F_Fusion/survey/fusion_survey_notes.md).
+
+**Điểm mới cần giữ** (vì "VIO + khớp ảnh vệ tinh" đã có: NaviLoc 2026, FoundLoc 2023, SWA-PF 2025):
+hiệp phương sai đo lấy từ **độ phân tán Top-K**, **gating χ²** theo dự đoán chuyển động, đo **đa giả thuyết** Top-K (particle filter), đánh giá theo **lỗi đuôi** (GFR, p95, lỗi lớn nhất).
+
+| Bước | Việc | Dữ liệu | Cổng qua |
+|---|---|---|---|
+| F1 | Khảo sát related work + dataset có IMU | — | Xong, xem survey notes |
+| F2 | Prototype bán mô phỏng: quỹ đạo giả trên lưới DenseUAV, IMU/VIO giả, đo retrieval (mô hình tổng hợp hoặc `.mat` thật) → ESKF / PF | Tổng hợp + DenseUAV `.mat` + `Dense_GPS_ALL.txt` | Fusion + gating giảm p95 so với chỉ retrieval, CI không chứa 0 |
+| F3 | Chạy F2 với `.mat` thật của LPN/FSRA trên server (cần GPS) | DenseUAV | Kết quả F2 lặp lại trên retrieval thật |
+| F4 | Tải và kiểm tra dữ liệu thật: MAFS (có IMU không?), Nardo-Air, MARS-LVIG | Thật | Chọn được ≥ 1 dataset có IMU + chuỗi bay + ảnh vệ tinh |
+| F5 | Pipeline trên dữ liệu thật, so với NaviLoc / FoundLoc / SWA-PF | Thật | Thắng hoặc ngang về mean, thắng rõ về p95 / lỗi lớn nhất |
+
+**Phụ thuộc:** F3 trở đi cần checkpoint retrieval đã tái lập (Giai đoạn 0). F2 dùng mô hình lỗi tổng hợp nên làm được ngay.
+
+**Điều chỉnh sau F4 (2026-10-01):** dữ liệu thật chính = **AerialVL**. Bước tiếp: (1) giải nén, đọc định dạng chuỗi và bản đồ; (2) cắt bản đồ thành tile gallery; (3) đo R@1 / Top-K zero-shot của 3 model DenseUAV trên ảnh AerialVL (rủi ro lệch miền → có thể fine-tune trên phần VPR); (4) chạy MH-EKF với IMU/VIO sinh từ GNSS; (5) khi có rosbag thì thay bằng IMU thật. Thêm **GeoVINS** (T-RO 2025) vào danh sách đối thủ.
+
+**Điều chỉnh sau F3 (2026-10-01):** dữ liệu thật có aliasing dài, nhất quán theo vùng (campus "song sinh"); MH-EKF cần ràng buộc vùng tới được khi tìm lại vị trí. Vì thiết kế đã bị chỉnh theo test, **bắt buộc** làm val theo campus trước khi báo số. Dataset đầy đủ đang tải về `datasets/` (16.7 GB); máy có RTX 3050 8 GB để sinh `.mat`.
+
+**Điều chỉnh sau F2-12 (2026-10-01):** phương pháp chính = **MH-EKF trên Top-K** (thay cho PF, vì PF hỏng khi chỉ có IMU). Đánh giá phải tách giai đoạn khởi tạo (30 s đầu) khỏi giai đoạn bám.
+
+**Điều chỉnh sau F2 (2026-10-01):** "hiệp phương sai theo độ phân tán Top-K" bị bác bỏ trong dạng hiện tại → đóng góp chính chuyển sang **particle filter đo đa giả thuyết trên Top-K** + **đánh giá theo lỗi đuôi**. Việc tiếp theo cho F3: (1) đo trên `.mat` thật xem tile đúng có nằm trong Top-10 khi top-1 sai không (giả định 50 % của mô phỏng), (2) đo tương quan lỗi giữa các tile liền kề (giả định persist), (3) thêm PF cho IMU-only, (4) thử dùng dispersion cho gating thay vì phóng R.
+
+---
+
 ## Theo dõi tiến độ
 
 | Giai đoạn | Trạng thái | Ghi chú |
 |---|---|---|
-| 0 | 🟡 Đang làm | Đã có công cụ `diagnostics/`; đã kiểm tra `.mat` 19.26% (pipeline so khớp OK). Chờ tìm checkpoint 82.20% để bisect |
+| 0 | ✅ Qua cổng (2026-10-01) | Đã có công cụ `diagnostics/`; đã kiểm tra `.mat` 19.26% (pipeline so khớp OK). 2026-10-01: checkpoint chính thức không tải được (OneDrive bị vô hiệu, Quark cần app, HF không có) → **train lại bằng code gốc `b8de187`** trên máy local (RTX 3050, worktree `../DenseUAV_b8de187`, E003); **baseline R@1 79.67 % → qua cổng**; LPN 86.36 %; FSRA 81.85 % (1 seed mỗi model), kết quả ở `../DenseUAV_b8de187/logs/stage0_summary.txt` |
 | 1 | ⬜ Chưa bắt đầu | |
 | 2 | ⬜ | |
 | 3 | ⬜ | |
 | 4 | ⬜ | |
 | 5 | ⬜ | |
+| F1 | ✅ Xong (2026-10-01) | Survey: NaviLoc là đối thủ gần nhất; dataset ứng viên MAFS, Nardo-Air, MARS-LVIG |
+| F2 | ✅ Xong val (2026-10-01) | Gating χ² là yếu tố chính; PF Top-K tốt nhất ở kịch bản khó **khi có VIO**; PF + IMU thuần thất bại (F2-10); R theo dispersion và gating theo dispersion bị bác bỏ (F2-02, F2-11). Chưa chạy test (seed 1) |
+| F3 | 🟡 Đang làm | GPS lấy từ HF. F3-01..03 trên `.mat` 19 %: MH-EKF (đã sửa) tốt nhất ở cả 4 kịch bản real. **Giao thức val/test (F3-04):** val = campus 9, 10, test = campus 11, 12 (`run_f2.py --campuses val/test`); thiết kế MH-EKF v2 chốt trên val. **F3-05 (test, ViT-S 79.67 %): MH-EKF tốt nhất ở cả 4 kịch bản, 0 % chuyến mất dấu sau 30 s.** F3-06 (LPN 86.36 %), F3-07 (FSRA 81.85 %) lặp lại kết luận: **MH-EKF tốt nhất ở cả 12 ô (3 model × 4 kịch bản) trên test**. **E006 + F3-08 xong (2026-10-02):** R@1 ổn định theo seed (std ≤ 1.2 điểm); MH-EKF thắng ekf_gated ở 108/108 ô (3 model × 3 seed model × 3 seed quỹ đạo × 4 kịch bản), mất dấu ≤ 0.2 % → ✅. **F3-09 (2026-10-05):** chạy lại 108 ô với MH-EKF v3 (`v_max = 0`): kết quả trùng v2 (lệch p95 ≤ 0.33 m), thắng gated 108/108 → **mọi bảng paper dùng MH-EKF v3** |
+| F2b | ✅ Xong val (2026-10-01) | Thay RBPF bằng **multi-hypothesis EKF** (F2-12): tốt hoặc ngang tốt nhất ở mọi kịch bản, kể cả IMU thuần → **phương pháp chính đề xuất cho paper**. Còn lại: chạy test seed 1 khi cấu hình đã chốt |
+| F4 | ✅ Xong (2026-10-02) | MAFS và Nardo-Air bản public không có IMU; chọn **AerialVL** (11 chuyến thật, GNSS, bản đồ vệ tinh). Đã tải `VAL` 54 GB; giải nén 5 chuyến ngắn; 6 chuyến dài xử lý từng chuyến (F5-05). IMU thật nằm trong rosbag GeoVINS trên Baidu (chưa có tài khoản) → IMU/VIO mô phỏng từ quỹ đạo GNSS thật |
+| F5 | 🟡 Đang làm (2026-10-02) | `Task_F_Fusion/aerialvl/`. F5-00 hình học (ảnh hướng đông, footprint 200 m); F5-01 retrieval zero-shot LPN top-1 ≤ 50 m 36 %, p95 3.8 km; F5-02 val: MH-EKF v2 thua PF ở chuyến khó (nhảy alias) → F5-03 **MH-EKF v3** (tìm lại trong 3σ), trùng v2 trên DenseUAV val. **F5-04 test (3 chuyến, xong):** MH-EKF v3 thắng gated 36/36, thắng PF 33/36 (thua < 1 m ở VIO); p95 VIO 37–41 m, IMU 56–72 m (PF 591–680), xuất phát sai 43–244 m (PF ~600) so với retrieval đơn thuần ~3.8 km. **F5-05 (5 chuyến dài, xong):** MH-EKF vẫn tốt nhất (p95 thấp nhất 12/12 ô), nhưng chỉ VIO cho kết quả dùng được (p95 ~50 m); chỉ IMU / xuất phát sai mất dấu 17–55 % cửa sổ → nút thắt là retrieval zero-shot. Hướng tiếp: fine-tune retrieval trên phần VPR của AerialVL (tránh trùng chuyến bay test), IMU thật (Baidu), so sánh đối thủ. **F6 (2026-10-06): đã so với NaviLoc** (cài lại, `prototype/naviloc.py`): MH-EKF thắng cả 3 biến thể NaviLoc ở 180/180 ô (AerialVL ngắn, dài, DenseUAV); NaviLoc vỡ khi > 50 % top-1 sai và khi chỉ có IMU. Chưa so với FoundLoc / SWA-PF / GeoVINS. **F7 (2026-10-08): fine-tune retrieval** trên 2 chuyến 03-16 (val 03-11): retrieval test gần gấp đôi (LPN top-1 ≤ 50 m chuyến dài 0.29 → 0.60); mất dấu của MH-EKF trên chuyến dài giảm (xuất phát sai 17–19 → 4–7 %, chỉ IMU 43–55 → 28–35 %); ở kịch bản dễ NaviLoc/PF ngang MH-EKF. Fine-tune cùng vùng bản đồ với test → nêu là giới hạn. **F5-06 (2026-10-05):** so với VIO/IMU đơn thuần (dead reckoning), MH-EKF giảm p95 khoảng 2× khi có VIO (dài 95 → 50 m), có ý nghĩa 22/24 ô (CI theo chuyến bay); EKF gated còn tệ hơn VIO đơn thuần ở chuyến dài; xuất phát sai trên chuyến dài chỉ thắng sau 60 s |

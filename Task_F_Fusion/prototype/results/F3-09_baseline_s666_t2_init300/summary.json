@@ -1,0 +1,135 @@
+{
+  "opt": {
+    "world": "real",
+    "result_mat": "../../../DenseUAV_b8de187/checkpoints/baseline/pytorch_result_1.mat",
+    "gps_path": "../../datasets/DenseUAV/Dense_GPS_ALL.txt",
+    "preset": "fsra",
+    "motion": "vio",
+    "imu_grade": "consumer",
+    "n_traj": 100,
+    "T": 300.0,
+    "meas_every": 1,
+    "init_err": 300.0,
+    "snap": 20.0,
+    "K": 10,
+    "persist": 0.5,
+    "p_true_in_topk": 0.5,
+    "anchor_truth": 0.5,
+    "methods": "ekf_gated,mh_ekf",
+    "campuses": "test",
+    "seed": 2,
+    "workers": 11,
+    "n_boot": 200,
+    "tag": "F3-09_baseline_s666_t2_init300",
+    "cfg": "{\"v_max\": 0.0}"
+  },
+  "cfg": {
+    "sig_p0": 450.0,
+    "sig_meas": 20.0,
+    "tau": 0.02,
+    "alpha": 1.0,
+    "disp_thr": 200.0,
+    "n_reacq": 20,
+    "sig_inflate": 50.0,
+    "n_particles": 2000,
+    "pf_eps": 0.3,
+    "pf_area": 1000000.0,
+    "pf_roughen": 2.0,
+    "pf_roughen_v": 0.05,
+    "pf_seed": 0,
+    "mh_max": 10,
+    "mh_merge": 15.0,
+    "mh_spawn_w": 0.05,
+    "v_max": 0.0,
+    "mh_lost_rule": "no_gate",
+    "mh_reach": true
+  },
+  "extra": {
+    "real_top1_categories": {
+      "correct": 0.7967,
+      "local<=100": 0.1184,
+      "far_same_campus": 0.0223,
+      "other_campus": 0.0626
+    },
+    "n_campus": 13,
+    "campus_split": {
+      "all": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "val": [
+        9,
+        10
+      ],
+      "test": [
+        11,
+        12
+      ]
+    }
+  },
+  "summary": {
+    "ekf_gated": {
+      "mean": 39.224651326413,
+      "p50": 3.089870550946543,
+      "p90": 6.99260905961924,
+      "p95": 9.412750102944306,
+      "p99": 1440.579914896271,
+      "max": 1480.1326199089624,
+      "traj_max_median": 10.39507502093588,
+      "traj_catastrophic_pct": 4.0,
+      "GFR@50": 3.0700000000000003,
+      "GFR@100": 3.0666666666666664,
+      "GFR@200": 3.06,
+      "GFR@500": 3.0,
+      "mean_ci95": [
+        3.8034084962793586,
+        81.79074733440332
+      ],
+      "p95_ci95": [
+        7.5192782545939725,
+        770.3486189572266
+      ],
+      "GFR@100_ci95": [
+        0.10241666666666668,
+        6.129583333333338
+      ],
+      "traj_catastrophic_pct_ci95": [
+        1.0,
+        8.0
+      ]
+    },
+    "mh_ekf": {
+      "mean": 3.8573500522237736,
+      "p50": 2.704675354175091,
+      "p90": 5.5316623013707416,
+      "p95": 6.596874438422591,
+      "p99": 10.087876393216183,
+      "max": 930.4118206667107,
+      "traj_max_median": 22.424314349785945,
+      "traj_catastrophic_pct": 23.0,
+      "GFR@50": 0.17333333333333334,
+      "GFR@100": 0.16333333333333333,
+      "GFR@200": 0.15,
+      "GFR@500": 0.08333333333333334,
+      "mean_ci95": [
+        3.640872491526423,
+        4.127233938325799
+      ],
+      "p95_ci95": [
+        6.267269093745854,
+        6.993540972060849
+      ],
+      "GFR@100_ci95": [
+        0.12333333333333332,
+        0.20666666666666667
+      ],
+      "traj_catastrophic_pct_ci95": [
+        14.000000000000002,
+        32.0
+      ]
+    }
+  },
+  "paired_diffs": {}
+}

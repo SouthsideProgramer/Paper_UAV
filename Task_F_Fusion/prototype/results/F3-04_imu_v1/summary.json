@@ -1,0 +1,105 @@
+{
+  "opt": {
+    "world": "real",
+    "result_mat": "../../Task_K_Gap_Spatial_Mismatch/data/pytorch_result.mat",
+    "gps_path": "../../datasets/DenseUAV/Dense_GPS_ALL.txt",
+    "preset": "fsra",
+    "motion": "imu",
+    "imu_grade": "consumer",
+    "n_traj": 100,
+    "T": 300.0,
+    "meas_every": 1,
+    "init_err": 10.0,
+    "snap": 20.0,
+    "K": 10,
+    "persist": 0.5,
+    "p_true_in_topk": 0.5,
+    "anchor_truth": 0.5,
+    "methods": "mh_ekf",
+    "campuses": "val",
+    "seed": 0,
+    "workers": 11,
+    "n_boot": 300,
+    "tag": "F3-04_imu_v1",
+    "cfg": "{\"mh_lost_rule\":\"no_gate\",\"mh_reach\":false}"
+  },
+  "cfg": {
+    "sig_p0": 15.0,
+    "sig_meas": 20.0,
+    "tau": 0.02,
+    "alpha": 1.0,
+    "disp_thr": 200.0,
+    "n_reacq": 20,
+    "sig_inflate": 50.0,
+    "n_particles": 2000,
+    "pf_eps": 0.3,
+    "pf_area": 1000000.0,
+    "pf_roughen": 2.0,
+    "pf_roughen_v": 0.05,
+    "pf_seed": 0,
+    "mh_max": 10,
+    "mh_merge": 15.0,
+    "mh_spawn_w": 0.05,
+    "v_max": 10.0,
+    "mh_lost_rule": "no_gate",
+    "mh_reach": false
+  },
+  "extra": {
+    "real_top1_categories": {
+      "correct": 0.1926,
+      "local<=100": 0.178,
+      "far_same_campus": 0.0837,
+      "other_campus": 0.5457
+    },
+    "n_campus": 13,
+    "campus_split": {
+      "all": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "val": [
+        9,
+        10
+      ],
+      "test": [
+        11,
+        12
+      ]
+    }
+  },
+  "summary": {
+    "mh_ekf": {
+      "mean": 21.611568425651,
+      "p50": 8.577001561344954,
+      "p90": 21.3763007779805,
+      "p95": 27.794467890645166,
+      "p99": 52.6754030631558,
+      "max": 4873.117403449635,
+      "traj_max_median": 36.59583491753724,
+      "traj_catastrophic_pct": 8.0,
+      "GFR@50": 1.1366666666666667,
+      "GFR@100": 0.33666666666666667,
+      "GFR@200": 0.31333333333333335,
+      "GFR@500": 0.31333333333333335,
+      "mean_ci95": [
+        11.979364277848443,
+        36.325895066663485
+      ],
+      "p95_ci95": [
+        25.726868365769,
+        30.44406557872314
+      ],
+      "GFR@100_ci95": [
+        0.09,
+        0.7279999999999989
+      ],
+      "traj_catastrophic_pct_ci95": [
+        3.0,
+        14.000000000000002
+      ]
+    }
+  },
+  "paired_diffs": {}
+}

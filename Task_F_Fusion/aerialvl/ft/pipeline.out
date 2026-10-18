@@ -1,0 +1,82 @@
+[22:24:22] trained baseline_s666: [INFO] best epoch 6: val top-1 <= 50 m 0.291 -> /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/ft/baseline_s666/net_119.pth
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/baseline_s666.npz (245s)
+[22:46:20] trained baseline_s667: [INFO] best epoch 4: val top-1 <= 50 m 0.286 -> /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/ft/baseline_s667/net_119.pth
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/baseline_s667.npz (242s)
+[23:08:15] trained baseline_s668: [INFO] best epoch 7: val top-1 <= 50 m 0.357 -> /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/ft/baseline_s668/net_119.pth
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/baseline_s668.npz (242s)
+[23:30:12] trained lpn_s666: [INFO] best epoch 4: val top-1 <= 50 m 0.335 -> /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/ft/lpn_s666/net_119.pth
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/lpn_s666.npz (243s)
+[23:51:35] trained lpn_s667: [INFO] best epoch 6: val top-1 <= 50 m 0.274 -> /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/ft/lpn_s667/net_119.pth
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/lpn_s667.npz (201s)
+[00:09:14] trained lpn_s668: [INFO] best epoch 3: val top-1 <= 50 m 0.355 -> /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/ft/lpn_s668/net_119.pth
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/lpn_s668.npz (200s)
+[00:26:49] trained fsra_s666: [INFO] best epoch 3: val top-1 <= 50 m 0.306 -> /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/ft/fsra_s666/net_119.pth
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/fsra_s666.npz (203s)
+[00:44:25] trained fsra_s667: [INFO] best epoch 5: val top-1 <= 50 m 0.282 -> /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/ft/fsra_s667/net_119.pth
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/fsra_s667.npz (201s)
+[01:02:01] trained fsra_s668: [INFO] best epoch 7: val top-1 <= 50 m 0.319 -> /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/ft/fsra_s668/net_119.pth
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/fsra_s668.npz (202s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s666_2023-03-16-18-04-01.npz (19s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s667_2023-03-16-18-04-01.npz (18s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s668_2023-03-16-18-04-01.npz (19s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s666_2023-03-16-18-04-01.npz (20s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s667_2023-03-16-18-04-01.npz (20s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s668_2023-03-16-18-04-01.npz (19s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s666_2023-03-16-18-04-01.npz (18s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s667_2023-03-16-18-04-01.npz (19s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s668_2023-03-16-18-04-01.npz (19s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s666_2023-03-18-12-18-25.npz (18s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s667_2023-03-18-12-18-25.npz (17s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s668_2023-03-18-12-18-25.npz (18s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s666_2023-03-18-12-18-25.npz (18s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s667_2023-03-18-12-18-25.npz (19s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s668_2023-03-18-12-18-25.npz (18s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s666_2023-03-18-12-18-25.npz (18s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s667_2023-03-18-12-18-25.npz (18s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s668_2023-03-18-12-18-25.npz (18s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s666_2023-03-18-12-47-05.npz (20s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s667_2023-03-18-12-47-05.npz (20s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s668_2023-03-18-12-47-05.npz (20s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s666_2023-03-18-12-47-05.npz (21s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s667_2023-03-18-12-47-05.npz (21s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s668_2023-03-18-12-47-05.npz (20s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s666_2023-03-18-12-47-05.npz (20s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s667_2023-03-18-12-47-05.npz (20s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s668_2023-03-18-12-47-05.npz (20s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s666_2023-03-18-14-38-32.npz (29s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s667_2023-03-18-14-38-32.npz (29s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s668_2023-03-18-14-38-32.npz (28s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s666_2023-03-18-14-38-32.npz (31s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s667_2023-03-18-14-38-32.npz (30s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s668_2023-03-18-14-38-32.npz (30s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s666_2023-03-18-14-38-32.npz (28s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s667_2023-03-18-14-38-32.npz (29s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s668_2023-03-18-14-38-32.npz (30s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s666_2023-03-18-15-01-14.npz (26s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s667_2023-03-18-15-01-14.npz (26s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s668_2023-03-18-15-01-14.npz (25s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s666_2023-03-18-15-01-14.npz (28s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s667_2023-03-18-15-01-14.npz (27s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s668_2023-03-18-15-01-14.npz (28s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s666_2023-03-18-15-01-14.npz (27s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s667_2023-03-18-15-01-14.npz (25s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s668_2023-03-18-15-01-14.npz (26s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s666_2023-03-18-15-40-18.npz (34s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s667_2023-03-18-15-40-18.npz (33s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/baseline_s668_2023-03-18-15-40-18.npz (34s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s666_2023-03-18-15-40-18.npz (36s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s667_2023-03-18-15-40-18.npz (36s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/lpn_s668_2023-03-18-15-40-18.npz (36s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s666_2023-03-18-15-40-18.npz (34s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s667_2023-03-18-15-40-18.npz (34s)
+[INFO] wrote /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/long/fsra_s668_2023-03-18-15-40-18.npz (34s)
+[INFO] /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/merged/baseline_s666.npz: 15136 queries
+[INFO] /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/merged/baseline_s667.npz: 15136 queries
+[INFO] /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/merged/baseline_s668.npz: 15136 queries
+[INFO] /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/merged/lpn_s666.npz: 15136 queries
+[INFO] /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/merged/lpn_s667.npz: 15136 queries
+[INFO] /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/merged/lpn_s668.npz: 15136 queries
+[INFO] /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/merged/fsra_s666.npz: 15136 queries
+[INFO] /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/merged/fsra_s667.npz: 15136 queries
+[INFO] /home/aclab_pc/Desktop/Paper_UAV/Paper_UAV/Task_F_Fusion/aerialvl/feats/ft/merged/fsra_s668.npz: 15136 queries
+F7_02_DONE

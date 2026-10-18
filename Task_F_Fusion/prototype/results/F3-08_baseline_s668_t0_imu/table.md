@@ -1,0 +1,8 @@
+Config: `{"world": "real", "result_mat": "../../../DenseUAV_b8de187/checkpoints/baseline_s668/pytorch_result_1.mat", "gps_path": "../../datasets/DenseUAV/Dense_GPS_ALL.txt", "preset": "fsra", "motion": "imu", "imu_grade": "consumer", "n_traj": 100, "T": 300.0, "meas_every": 1, "init_err": 10.0, "snap": 20.0, "K": 10, "persist": 0.5, "p_true_in_topk": 0.5, "anchor_truth": 0.5, "methods": "retrieval_top1,ekf_gated,pf_topk,mh_ekf", "campuses": "test", "seed": 0, "workers": 4, "n_boot": 200, "tag": "F3-08_baseline_s668_t0_imu", "cfg": ""}`
+
+| Method | mean | p50 | p90 | p95 | max | GFR@50 | GFR@100 | GFR@500 | traj_catastrophic_pct | p95 CI95 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| retrieval_top1 | 123.1 | 8.9 | 32.8 | 613.6 | 4458.7 | 7.7 | 5.9 | 5.3 | 100.0 | [193.2, 1146.4] |
+| ekf_gated | 5.7 | 4.6 | 10.4 | 13.3 | 152.3 | 0.1 | 0.1 | 0.0 | 0.0 | [12.3, 14.1] |
+| pf_topk | 9.3 | 5.6 | 15.2 | 23.1 | 480.8 | 1.5 | 0.6 | 0.0 | 0.0 | [16.7, 30.5] |
+| mh_ekf | 4.7 | 4.1 | 8.6 | 10.5 | 41.3 | 0.0 | 0.0 | 0.0 | 0.0 | [10.0, 11.1] |

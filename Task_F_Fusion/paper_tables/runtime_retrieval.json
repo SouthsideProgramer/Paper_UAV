@@ -1,0 +1,36 @@
+{
+ "baseline": {
+  "batch": 2,
+  "gpu_busy_other_process": false,
+  "desc_ms_mean": 13.778564858948812,
+  "desc_ms_p95": 14.315572229679672,
+  "params_M": 23.406136,
+  "dim": 512
+ },
+ "lpn": {
+  "batch": 2,
+  "gpu_busy_other_process": false,
+  "desc_ms_mean": 13.83248291327618,
+  "desc_ms_p95": 14.426292153075337,
+  "params_M": 24.761608,
+  "dim": 1024
+ },
+ "fsra": {
+  "batch": 2,
+  "gpu_busy_other_process": false,
+  "desc_ms_mean": 13.755334510933608,
+  "desc_ms_p95": 14.306840643985197,
+  "params_M": 24.761608,
+  "dim": 512
+ },
+ "topk_search_dim512": {
+  "ms_mean": 1.9531470793299377,
+  "ms_p95": 3.2534929749090225,
+  "gallery": 28340
+ },
+ "topk_search_dim1024": {
+  "ms_mean": 3.8357997220009565,
+  "ms_p95": 5.211093870457262,
+  "gallery": 28340
+ }
+}

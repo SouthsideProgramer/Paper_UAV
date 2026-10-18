@@ -1,0 +1,198 @@
+{
+  "opt": {
+    "world": "real",
+    "result_mat": "../../../DenseUAV_b8de187/checkpoints/fsra_s667/pytorch_result_1.mat",
+    "gps_path": "../../datasets/DenseUAV/Dense_GPS_ALL.txt",
+    "preset": "fsra",
+    "motion": "vio",
+    "imu_grade": "consumer",
+    "n_traj": 100,
+    "T": 300.0,
+    "meas_every": 1,
+    "init_err": 10.0,
+    "snap": 20.0,
+    "K": 10,
+    "persist": 0.5,
+    "p_true_in_topk": 0.5,
+    "anchor_truth": 0.5,
+    "methods": "ekf_gated,naviloc,naviloc_yaw,naviloc_causal",
+    "campuses": "test",
+    "seed": 0,
+    "workers": 11,
+    "n_boot": 100,
+    "tag": "F6-02_dense_fsra_s667_t0_vio",
+    "cfg": "{\"v_max\": 0.0}"
+  },
+  "cfg": {
+    "sig_p0": 15.0,
+    "sig_meas": 20.0,
+    "tau": 0.02,
+    "alpha": 1.0,
+    "disp_thr": 200.0,
+    "n_reacq": 20,
+    "sig_inflate": 50.0,
+    "n_particles": 2000,
+    "pf_eps": 0.3,
+    "pf_area": 1000000.0,
+    "pf_roughen": 2.0,
+    "pf_roughen_v": 0.05,
+    "pf_seed": 0,
+    "mh_max": 10,
+    "mh_merge": 15.0,
+    "mh_spawn_w": 0.05,
+    "v_max": 0.0,
+    "mh_lost_rule": "no_gate",
+    "mh_reach": true,
+    "nl_W": 30,
+    "nl_O": 15,
+    "nl_K": 3
+  },
+  "extra": {
+    "real_top1_categories": {
+      "correct": 0.8069,
+      "local<=100": 0.115,
+      "far_same_campus": 0.0176,
+      "other_campus": 0.0605
+    },
+    "n_campus": 13,
+    "campus_split": {
+      "all": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "val": [
+        9,
+        10
+      ],
+      "test": [
+        11,
+        12
+      ]
+    }
+  },
+  "summary": {
+    "ekf_gated": {
+      "mean": 3.4065018025425005,
+      "p50": 2.9835051360447364,
+      "p90": 6.025000630363791,
+      "p95": 7.361542995717112,
+      "p99": 11.436968089931682,
+      "max": 28.663619055293648,
+      "traj_max_median": 11.08969794475766,
+      "traj_catastrophic_pct": 0.0,
+      "GFR@50": 0.0,
+      "GFR@100": 0.0,
+      "GFR@200": 0.0,
+      "GFR@500": 0.0,
+      "mean_ci95": [
+        3.2202712347431737,
+        3.6065418540819856
+      ],
+      "p95_ci95": [
+        6.883376005610051,
+        7.962682974603154
+      ],
+      "GFR@100_ci95": [
+        0.0,
+        0.0
+      ],
+      "traj_catastrophic_pct_ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "naviloc": {
+      "mean": 5.115804595795193,
+      "p50": 4.584068495714549,
+      "p90": 9.090141651133761,
+      "p95": 10.648788728823444,
+      "p99": 14.833780598553671,
+      "max": 42.6479657052742,
+      "traj_max_median": 14.464818552859793,
+      "traj_catastrophic_pct": 0.0,
+      "GFR@50": 0.0,
+      "GFR@100": 0.0,
+      "GFR@200": 0.0,
+      "GFR@500": 0.0,
+      "mean_ci95": [
+        5.002472861133501,
+        5.261110405766598
+      ],
+      "p95_ci95": [
+        10.404315943172339,
+        10.931277277119385
+      ],
+      "GFR@100_ci95": [
+        0.0,
+        0.0
+      ],
+      "traj_catastrophic_pct_ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "naviloc_yaw": {
+      "mean": 5.0985622263214765,
+      "p50": 4.598248001529221,
+      "p90": 9.095873883582648,
+      "p95": 10.598849824315716,
+      "p99": 14.33786971443113,
+      "max": 43.66721211616133,
+      "traj_max_median": 14.576995745344433,
+      "traj_catastrophic_pct": 0.0,
+      "GFR@50": 0.0,
+      "GFR@100": 0.0,
+      "GFR@200": 0.0,
+      "GFR@500": 0.0,
+      "mean_ci95": [
+        4.962981756351692,
+        5.230781196804031
+      ],
+      "p95_ci95": [
+        10.3468606723984,
+        10.839510422427033
+      ],
+      "GFR@100_ci95": [
+        0.0,
+        0.0
+      ],
+      "traj_catastrophic_pct_ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "naviloc_causal": {
+      "mean": 8.307567546020326,
+      "p50": 5.997332958626138,
+      "p90": 12.01365565389097,
+      "p95": 14.592738753197935,
+      "p99": 22.15308605373913,
+      "max": 3761.087521923262,
+      "traj_max_median": 24.60921040832904,
+      "traj_catastrophic_pct": 11.0,
+      "GFR@50": 0.3,
+      "GFR@100": 0.18,
+      "GFR@200": 0.13,
+      "GFR@500": 0.11333333333333334,
+      "mean_ci95": [
+        7.286731923838593,
+        9.33110498509259
+      ],
+      "p95_ci95": [
+        14.180344886613787,
+        15.034595923819879
+      ],
+      "GFR@100_ci95": [
+        0.08966666666666667,
+        0.2936666666666666
+      ],
+      "traj_catastrophic_pct_ci95": [
+        5.475,
+        17.0
+      ]
+    }
+  },
+  "paired_diffs": {}
+}

@@ -1,0 +1,30 @@
+\begin{table*}[t]
+\centering
+\caption{AerialVL test flights (2023-03-18, never used for any design choice). p95 position error in metres, in brackets the percentage of 240-s windows that exceed 100\,m after the first 60\,s (lost). Mean over 3 retrieval heads $\times$ 3 training seeds. $\epsilon_0$: start position error $\sigma=300$\,m. IMU/VIO are simulated from the GNSS trajectory (Sec.~\ref{sec:setup}). Bold: lowest p95 among the filters. $^\dagger$Our re-implementation.}
+\label{tab:aerialvl}
+\setlength{\tabcolsep}{4pt}
+\small
+\begin{tabular}{lcccccccc}
+\toprule
+ & \multicolumn{4}{c}{3 \texttt{short\_trajtr} flights (3.6--4.5\,km)} & \multicolumn{4}{c}{5 \texttt{long\_trajtr} flights (4.4--9.9\,km)} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}
+Method & VIO & IMU & VIO+$\epsilon_0$ & IMU+$\epsilon_0$ & VIO & IMU & VIO+$\epsilon_0$ & IMU+$\epsilon_0$ \\
+\midrule
+\multicolumn{9}{l}{\emph{Retrieval fine-tuned on non-test flights (Sec.~\ref{sec:ft})}} \\
+Motion only & 106 (20) & 1842 (100) & 753 (97) & 1923 (100) & 95 (17) & 1734 (100) & 759 (97) & 1881 (100) \\
+Retrieval top-1 & 2244 (95) & 2244 (95) & 2244 (95) & 2244 (95) & 3261 (100) & 3261 (100) & 3261 (100) & 3261 (100) \\
+EKF, $\chi^2$-gated & 41 (7) & 85 (21) & 408 (13) & 430 (25) & 55 (11) & 348 (42) & 1168 (29) & 1532 (52) \\
+PF, Top-$K$ & \textbf{36} (0.2) & 583 (54) & 104 (4) & 1926 (93) & 50 (2) & 768 (67) & 603 (16) & 1949 (92) \\
+NaviLoc$^\dagger$ \cite{shpagin2026naviloc} & 38 (0) & 1105 (98) & \textbf{38} (0) & 1105 (98) & 404 (9) & 1244 (99) & 404 (9) & 1244 (99) \\
+\textbf{MH-EKF (ours)} & 37 ($<$0.1) & \textbf{51} (10) & 40 (2) & \textbf{63} (12) & \textbf{49} (2) & \textbf{195} (31) & \textbf{102} (5) & \textbf{550} (33) \\
+\midrule
+\multicolumn{9}{l}{\emph{Retrieval zero-shot (trained on DenseUAV only)}} \\
+Motion only & 106 (20) & 1842 (100) & 753 (97) & 1923 (100) & 95 (17) & 1734 (100) & 759 (97) & 1881 (100) \\
+Retrieval top-1 & 3834 (100) & 3834 (100) & 3834 (100) & 3834 (100) & 3753 (100) & 3753 (100) & 3753 (100) & 3753 (100) \\
+EKF, $\chi^2$-gated & 70 (19) & 417 (44) & 1104 (40) & 1758 (57) & 107 (32) & 1234 (71) & 1382 (64) & 2372 (82) \\
+PF, Top-$K$ & 39 (0.1) & 641 (61) & 598 (16) & 2080 (94) & 53 (5) & 1022 (76) & 861 (38) & 2162 (97) \\
+NaviLoc$^\dagger$ \cite{shpagin2026naviloc} & 402 (24) & 1274 (99) & 402 (24) & 1274 (99) & 1709 (39) & 1871 (100) & 1709 (39) & 1871 (100) \\
+\textbf{MH-EKF (ours)} & \textbf{38} (0) & \textbf{64} (18) & \textbf{148} (4) & \textbf{321} (21) & \textbf{50} (4) & \textbf{463} (48) & \textbf{612} (18) & \textbf{1154} (53) \\
+\bottomrule
+\end{tabular}
+\end{table*}

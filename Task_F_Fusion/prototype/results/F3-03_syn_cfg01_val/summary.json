@@ -1,0 +1,108 @@
+{
+  "opt": {
+    "world": "synthetic",
+    "result_mat": "",
+    "gps_path": "",
+    "preset": "fsra",
+    "motion": "vio",
+    "imu_grade": "consumer",
+    "n_traj": 100,
+    "T": 300.0,
+    "meas_every": 1,
+    "init_err": 10.0,
+    "snap": 20.0,
+    "K": 10,
+    "persist": 0.5,
+    "p_true_in_topk": 0.5,
+    "anchor_truth": 0.5,
+    "methods": "ekf_gated,mh_ekf",
+    "seed": 0,
+    "workers": 11,
+    "n_boot": 1000,
+    "tag": "F3-03_syn_cfg01_val",
+    "cfg": ""
+  },
+  "cfg": {
+    "sig_p0": 15.0,
+    "sig_meas": 20.0,
+    "tau": 0.02,
+    "alpha": 1.0,
+    "disp_thr": 200.0,
+    "n_reacq": 20,
+    "sig_inflate": 50.0,
+    "n_particles": 2000,
+    "pf_eps": 0.3,
+    "pf_area": 1000000.0,
+    "pf_roughen": 2.0,
+    "pf_roughen_v": 0.05,
+    "pf_seed": 0,
+    "mh_max": 10,
+    "mh_merge": 15.0,
+    "mh_spawn_w": 0.05,
+    "v_max": 10.0
+  },
+  "extra": {},
+  "summary": {
+    "ekf_gated": {
+      "mean": 3.7696788070639364,
+      "p50": 3.2263031519969925,
+      "p90": 6.692634953605627,
+      "p95": 8.344890234539232,
+      "p99": 13.781761073033206,
+      "max": 41.14973341424061,
+      "traj_max_median": 12.443480330838437,
+      "traj_catastrophic_pct": 0.0,
+      "GFR@50": 0.0,
+      "GFR@100": 0.0,
+      "GFR@200": 0.0,
+      "GFR@500": 0.0,
+      "mean_ci95": [
+        3.582059754322062,
+        3.9509631159693415
+      ],
+      "p95_ci95": [
+        7.772688593578619,
+        9.004261433007967
+      ],
+      "GFR@100_ci95": [
+        0.0,
+        0.0
+      ],
+      "traj_catastrophic_pct_ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "mh_ekf": {
+      "mean": 3.9218655470311274,
+      "p50": 3.3772783674214644,
+      "p90": 6.987843447345829,
+      "p95": 8.447876539961605,
+      "p99": 13.302589249854265,
+      "max": 30.279645746133443,
+      "traj_max_median": 13.121665933846002,
+      "traj_catastrophic_pct": 0.0,
+      "GFR@50": 0.0,
+      "GFR@100": 0.0,
+      "GFR@200": 0.0,
+      "GFR@500": 0.0,
+      "mean_ci95": [
+        3.7359291543113975,
+        4.109971523430138
+      ],
+      "p95_ci95": [
+        7.9254101510468375,
+        8.986947531544715
+      ],
+      "GFR@100_ci95": [
+        0.0,
+        0.0
+      ],
+      "traj_catastrophic_pct_ci95": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "paired_diffs": {}
+}
