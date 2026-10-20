@@ -131,6 +131,9 @@ def top1(path):
 
 
 def table_retrieval():
+    if not os.path.exists(f"{TF}/aerialvl/feats/merged/baseline_s666.npz"):   # feature files are not shipped with the result package
+        print("[WARN] AerialVL feature files missing -> keeping the existing tables/retrieval.tex")
+        return
     r1 = {"baseline": (79.67, 80.35, 80.22), "lpn": (86.36, 84.17, 84.47), "fsra": (81.85, 80.69, 80.18)}  # E006 (EXPERIMENT_LOG)
     hn = {"baseline": "ViT-S, single branch", "lpn": "ViT-S + LPN", "fsra": "ViT-S + FSRA"}
     L = ["\\begin{table}[t]", "\\centering",
